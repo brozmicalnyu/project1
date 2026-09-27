@@ -5,7 +5,7 @@
     "island-nw": "Retains a customs exemption dating to the Company concession. The exemption was never formally closed.",
     "island-sw": "Named under Protectorate survey. The name has stood without amendment since.",
     "island-se": "The name in current administrative use. An earlier name remains in circulation on charts from the other claimant.",
-    "site-re-1": "Cleared after the rupture and never re-parcelled. No permit exists to build on it, and none has ever been filed.",
+    "site-re-1": "Four fingers made from ruin reaching into the sky\na skeletal hand, victim of unknown conflict\na site for a communion ungrasped\na gesture from a time unremembered\na fifth finger excised.\n\nThe central landmark of Remembrance, the Void is a sacred, taboo site for both the Republic and the Remembered. Each believes it to be the location of a key battle during the war of the Redaction. Neither can recall its significance, nor what structures stood there before.",
     "site-re-2": "Raised in the Occupation era to cover the strait. Retained afterward for want of a reason to take it down.",
     "site-re-3": "Rebuilt on the same footprint twice. Both times, facing the Void.",
     "site-re-4": "Unrecorded in the founding survey. It appears first in a maintenance log, already old.",
@@ -33,20 +33,60 @@
   "dialogue": {
     "site-re-1": [
       {
-        "s": "L",
-        "t": "The ground at the middle. Nothing was ever put back. What stands around it grew from the lip of the hole rather than over it, and that is held to be correct."
-      },
-      {
         "s": "R",
-        "t": "Detonation site. Cleared, never re-parcelled. The reconstruction is non-orthogonal because it was grafted onto the blast edge — the only sector the recognition core cannot resolve."
+        "t": "Every causeway on this island ends here. But nobody lives there?"
       },
       {
         "s": "L",
-        "t": "You do not walk across it. You walk round."
+        "t": "Yeah nobody lives there, everyone just passes through it."
       },
       {
         "s": "R",
-        "t": "Whatever went off there, it was not on the works schedule."
+        "t": "I've been doing some research, but it just turns up as a gap in the history."
+      },
+      {
+        "s": "L",
+        "t": "We call it the Redaction."
+      },
+      {
+        "s": "R",
+        "t": "Don't you think it's strange that both the Republic and the Remembered date their formation to this, but no one knows what it is?"
+      },
+      {
+        "s": "L",
+        "t": "Everyone agrees it was a war. Nobody agrees who was fighting."
+      },
+      {
+        "s": "R",
+        "t": "The chart shows four islands."
+      },
+      {
+        "s": "L",
+        "t": "Ask any of the locals, they'll tell you there's a fifth but we aren't supposed to talk about it."
+      },
+      {
+        "s": "R",
+        "t": "Did you know some cultures believe the number 4 to be unlucky? Some buildings even skip that level. But it makes sense in engineering — a cube frame seems stable, but unless you introduce a fifth line diagonally, the whole thing falls apart."
+      },
+      {
+        "s": "L",
+        "t": "Load-bearing."
+      },
+      {
+        "s": "R",
+        "t": "Yes."
+      },
+      {
+        "s": "L",
+        "t": "We have a word for that in our language, both for the void and the hidden force that holds up the world. We call it (___)."
+      },
+      {
+        "s": "R",
+        "t": "Is that your word for a hole with a shape?"
+      },
+      {
+        "s": "L",
+        "t": "... It's the only one I've got."
       }
     ],
     "site-re-2": [

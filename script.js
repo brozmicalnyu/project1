@@ -186,19 +186,6 @@ function paintSheet(){
   }
   sc.putImageData(im,0,0);
 
-  const S=Math.max(15,Math.round(N/56));
-  const stamp=(x,y,label,on)=>{
-    const qx=Math.round(x-S/2), qy=Math.round(y-S/2);
-    sc.fillStyle='#000'; sc.fillRect(qx-4,qy-4,S+8,S+8);
-    sc.fillStyle='#fff'; sc.fillRect(qx-2,qy-2,S+4,S+4);
-    sc.fillStyle= on?'#fff':'#141414'; sc.fillRect(qx,qy,S,S);
-    sc.fillStyle= on?'#000':'#fff';
-    sc.font='bold '+Math.round(S*0.8)+'px DotGothic16, monospace';
-    sc.textAlign='center'; sc.textBaseline='middle';
-    sc.fillText(label, qx+S/2, qy+S/2+S*0.04);
-  };
-  BRIDGES.forEach((b,i)=> stamp(b.x,b.y,b.n, !!(sel&&sel.key==='b'+i)) );
-  POI.forEach((p,i)=> stamp(p.x,p.y,p.n, !!(sel&&sel.key==='p'+i)) );
 }
 
 /* the chart is letterboxed into its frame, sea filling the remainder */
@@ -212,7 +199,41 @@ function draw(){
   fitS=Math.min(w,h)/MAP;
   fitX=(w-MAP*fitS)/2; fitY=(h-MAP*fitS)/2;
   ctx.drawImage(sheet, fitX, fitY, MAP*fitS, MAP*fitS);
+  drawMarkers();
 }
+
+/* markers live on top of the baked map, redrawn every frame so the
+   unselected ones can pulse — a plain visual cue that they're clickable.
+   The selected marker stays static (inverted, full size) so it doesn't
+   compete with whichever one the person is meant to notice next. */
+function drawMarkers(){
+  const S=Math.max(15,Math.round(N/56))*fitS;
+  const t=performance.now()/1000;
+  const pulse=(Math.sin(t*3)+1)/2;         // 0..1, ~1 second period
+  const one=(wx,wy,label,on)=>{
+    const x=fitX+wx*fitS, y=fitY+wy*fitS;
+    const scale = on ? 1 : 1+0.22*pulse;
+    ctx.save();
+    ctx.globalAlpha = on ? 1 : 0.6+0.4*pulse;
+    ctx.translate(x,y);
+    ctx.scale(scale,scale);
+    ctx.fillStyle='#000'; ctx.fillRect(-S/2-4,-S/2-4,S+8,S+8);
+    ctx.fillStyle='#fff'; ctx.fillRect(-S/2-2,-S/2-2,S+4,S+4);
+    ctx.fillStyle= on?'#fff':'#141414'; ctx.fillRect(-S/2,-S/2,S,S);
+    ctx.fillStyle= on?'#000':'#fff';
+    ctx.font='bold '+Math.round(S*0.8)+'px DotGothic16, monospace';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(label, 0, S*0.04);
+    ctx.restore();
+  };
+  BRIDGES.forEach((b,i)=> one(b.x,b.y,b.n, !!(sel&&sel.key==='b'+i)) );
+  POI.forEach((p,i)=> one(p.x,p.y,p.n, !!(sel&&sel.key==='p'+i)) );
+}
+
+(function pulseLoop(){
+  if(sheet) draw();
+  requestAnimationFrame(pulseLoop);
+})();
 function resize(){
   const r=frame.getBoundingClientRect();
   const dpr=Math.min(2,window.devicePixelRatio||1);
