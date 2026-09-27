@@ -208,19 +208,18 @@ function draw(){
    compete with whichever one the person is meant to notice next. */
 function drawMarkers(){
   const S=Math.max(15,Math.round(N/56))*fitS;
-  const t=performance.now()/1000;
-  const pulse=(Math.sin(t*3)+1)/2;         // 0..1, ~1 second period
+  // hard flip, not a tween: unselected markers swap white-on-black /
+  // black-on-white twice a second, like a blinking cursor
+  const flip = Math.floor(performance.now()/500)%2===0;
   const one=(wx,wy,label,on)=>{
     const x=fitX+wx*fitS, y=fitY+wy*fitS;
-    const scale = on ? 1 : 1+0.22*pulse;
+    const inverted = on ? true : flip;
     ctx.save();
-    ctx.globalAlpha = on ? 1 : 0.6+0.4*pulse;
     ctx.translate(x,y);
-    ctx.scale(scale,scale);
     ctx.fillStyle='#000'; ctx.fillRect(-S/2-4,-S/2-4,S+8,S+8);
     ctx.fillStyle='#fff'; ctx.fillRect(-S/2-2,-S/2-2,S+4,S+4);
-    ctx.fillStyle= on?'#fff':'#141414'; ctx.fillRect(-S/2,-S/2,S,S);
-    ctx.fillStyle= on?'#000':'#fff';
+    ctx.fillStyle= inverted?'#fff':'#141414'; ctx.fillRect(-S/2,-S/2,S,S);
+    ctx.fillStyle= inverted?'#000':'#fff';
     ctx.font='bold '+Math.round(S*0.8)+'px DotGothic16, monospace';
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillText(label, 0, S*0.04);
