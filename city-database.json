@@ -1,0 +1,477 @@
+{
+  "hist": {
+    "island-core": "Named by the Eastern Shoals Company for those lost on the passage. The name was never revised by any later administration.",
+    "island-ne": "Absent from the current civic register. Older charts give a name the present administration does not use.",
+    "island-nw": "Retains a customs exemption dating to the Company concession. The exemption was never formally closed.",
+    "island-sw": "Named under Protectorate survey. The name has stood without amendment since.",
+    "island-se": "The name in current administrative use. An earlier name remains in circulation on charts from the other claimant.",
+    "site-re-1": "Cleared after the rupture and never re-parcelled. No permit exists to build on it, and none has ever been filed.",
+    "site-re-2": "Raised in the Occupation era to cover the strait. Retained afterward for want of a reason to take it down.",
+    "site-re-3": "Rebuilt on the same footprint twice. Both times, facing the Void.",
+    "site-re-4": "Unrecorded in the founding survey. It appears first in a maintenance log, already old.",
+    "site-su-1": "Logged only as tonnage received. No register of names was ever kept here.",
+    "site-su-2": "Built to a fixed plan under Protectorate ordinance. The plan has not been revised since.",
+    "site-su-3": "One of a matched pair. Its readings are filed and have not been published.",
+    "site-su-4": "The point at which the island stops appearing on the civic register. No structure marks it.",
+    "site-th-1": "The oldest working structure in the archipelago. Rebuilt in place, never relocated.",
+    "site-th-2": "Determinations made here are executed on Sempadan Jaya. The two offices have never shared a file.",
+    "site-th-3": "Left deliberately unbuilt. The emptiness appears in the original specification, not as an oversight.",
+    "site-th-4": "A surveyed stone, placed to mark the seeker's forward limit. Its position has not been re-checked.",
+    "site-co-1": "Rebuilt in full after the rupture. No structural record from before that date survives on file.",
+    "site-co-2": "Private frontage, reinforced after the rupture. Sits above ground shared with Sunyi.",
+    "site-co-3": "Maintained by custom rather than ordinance. No engineering rationale is recorded for the practice.",
+    "site-co-4": "A private commission, independently surveyed. Its heading has never been reconciled with the Core's.",
+    "site-se-1": "Established to monitor settlement across the archipelago. Its findings are not a matter of public record.",
+    "site-se-2": "Contractor records, unclaimed after dissolution. Sealed by default, not by order.",
+    "site-se-3": "Issues consent for construction. Heavy load applications are subject to an unwritten review.",
+    "site-se-4": "Paired with the station on the Interzone. The pairing is not named in either island's charter.",
+    "span-a": "Checkpointed at both landings since construction. No alternate route between the outer islands exists.",
+    "span-b": "Rebuilt after a partial failure. The replacement span is a different width from the original deck.",
+    "span-c": "Held under private concession. Its posted load limit is lower than its rated capacity.",
+    "span-d": "Carries a telemetry conduit alongside the roadway, installed after the deck itself."
+  },
+  "dialogue": {
+    "site-re-1": [
+      {
+        "s": "L",
+        "t": "The ground at the middle. Nothing was ever put back. What stands around it grew from the lip of the hole rather than over it, and that is held to be correct."
+      },
+      {
+        "s": "R",
+        "t": "Detonation site. Cleared, never re-parcelled. The reconstruction is non-orthogonal because it was grafted onto the blast edge — the only sector the recognition core cannot resolve."
+      },
+      {
+        "s": "L",
+        "t": "You do not walk across it. You walk round."
+      },
+      {
+        "s": "R",
+        "t": "Whatever went off there, it was not on the works schedule."
+      }
+    ],
+    "site-re-2": [
+      {
+        "s": "L",
+        "t": "The eye. Everyone knows which way it faces. No one agrees on whether it is looking."
+      },
+      {
+        "s": "R",
+        "t": "Electro-optical turret, fixed forward cone over Sunyi and the Interzone. The rear pair sit permanently outside its field of view."
+      },
+      {
+        "s": "L",
+        "t": "My mother waved at it once. For luck, she said."
+      },
+      {
+        "s": "R",
+        "t": "That blind arc is worth more than any deed on Concord."
+      }
+    ],
+    "site-re-3": [
+      {
+        "s": "L",
+        "t": "Judgement is made before you arrive. The hearing is for your benefit, not theirs."
+      },
+      {
+        "s": "R",
+        "t": "Classification hardware. Pre-sorts every case before a human opens the file; the human stage is review, not decision."
+      },
+      {
+        "s": "L",
+        "t": "Nobody has ever been surprised by a verdict here."
+      },
+      {
+        "s": "R",
+        "t": "It was built facing the Void. Read into that what you like."
+      }
+    ],
+    "site-re-4": [
+      {
+        "s": "L",
+        "t": "You face it. That is the whole of the practice. Nothing has ever answered and nothing is expected to."
+      },
+      {
+        "s": "R",
+        "t": "Hardened control link, fixed 300 degrees, toward an operator whose status — live, dark, one-way — the archipelago has no means of establishing."
+      },
+      {
+        "s": "L",
+        "t": "Asking whether anyone is out there — that is the rude question."
+      },
+      {
+        "s": "R",
+        "t": "The link log has not been opened since the concession lapsed."
+      }
+    ],
+    "site-su-1": [
+      {
+        "s": "L",
+        "t": "The gate everyone passes and nobody describes afterwards."
+      },
+      {
+        "s": "R",
+        "t": "Reception and classification. Throughput is the only published figure, and it is published as tonnage of construction load."
+      },
+      {
+        "s": "L",
+        "t": "My cousin went through in the spring. That is all I know."
+      },
+      {
+        "s": "R",
+        "t": "People counted as ballast. That is not a metaphor here."
+      }
+    ],
+    "site-su-2": [
+      {
+        "s": "L",
+        "t": "Identical, and counted daily. The count is the day."
+      },
+      {
+        "s": "R",
+        "t": "Uniform barrack footprint. Structural load is fixed by ordinance, because varying it would tilt Concord."
+      },
+      {
+        "s": "L",
+        "t": "You hear it from the water if the wind is right."
+      },
+      {
+        "s": "R",
+        "t": "The ordinance does not say why. It never has."
+      }
+    ],
+    "site-su-3": [
+      {
+        "s": "L",
+        "t": "The little hut nobody staffs. Old people touch the wall when they pass it."
+      },
+      {
+        "s": "R",
+        "t": "Inclinometer post. Logs differential settlement against its twin on Concord. Filed with Sempadan Jaya, never released."
+      },
+      {
+        "s": "L",
+        "t": "Custom, they say. Nobody remembers starting it."
+      },
+      {
+        "s": "R",
+        "t": "I requested the series four times. Four refusals, no reason given."
+      }
+    ],
+    "site-su-4": [
+      {
+        "s": "L",
+        "t": "There is no fourth island. Ask at the Registry and they will tell you so politely."
+      },
+      {
+        "s": "R",
+        "t": "The administrative boundary at which this island stops appearing on the register. Not a wall — a filing convention."
+      },
+      {
+        "s": "L",
+        "t": "Sunyi is what we call it. The charts leave a gap."
+      },
+      {
+        "s": "R",
+        "t": "The numeral was retired rather than reassigned. Deliberate."
+      }
+    ],
+    "site-th-1": [
+      {
+        "s": "L",
+        "t": "Where you wait. Some waited so long the waiting became the address."
+      },
+      {
+        "s": "R",
+        "t": "Primary landing, inside the forward cone. Arrival is recorded optically before any document is presented."
+      },
+      {
+        "s": "L",
+        "t": "I was born two hundred metres from here. Still not on a roll."
+      },
+      {
+        "s": "R",
+        "t": "You are processed before you are asked anything."
+      }
+    ],
+    "site-th-2": [
+      {
+        "s": "L",
+        "t": "Everything is decided here by people who will never see where you are sent."
+      },
+      {
+        "s": "R",
+        "t": "Determinations drafted here, executed on Sempadan Jaya. Neither office visits the other."
+      },
+      {
+        "s": "L",
+        "t": "They are not unkind. They are just elsewhere."
+      },
+      {
+        "s": "R",
+        "t": "Two authorities, no shared jurisdiction, and it functions perfectly."
+      }
+    ],
+    "site-th-3": [
+      {
+        "s": "L",
+        "t": "Open ground, no shade, and a line that moves at the pace of the sea."
+      },
+      {
+        "s": "R",
+        "t": "Holding yard, deliberately unbuilt so occupancy reads from above at all hours."
+      },
+      {
+        "s": "L",
+        "t": "Bring water. Nobody tells you that."
+      },
+      {
+        "s": "R",
+        "t": "The emptiness is the instrument. It was designed empty."
+      }
+    ],
+    "site-th-4": [
+      {
+        "s": "L",
+        "t": "Past this stone you are seen. Before it, so they say, you are only likely to be."
+      },
+      {
+        "s": "R",
+        "t": "Surveyed limit of the seeker\\u2019s forward arc. The marker is ceremonial; the arc is not."
+      },
+      {
+        "s": "L",
+        "t": "Children dare each other across it. Always have."
+      },
+      {
+        "s": "R",
+        "t": "The stone is thirty metres off. Nobody has moved it."
+      }
+    ],
+    "site-co-1": [
+      {
+        "s": "L",
+        "t": "Nothing happened here. You can see that nothing happened here."
+      },
+      {
+        "s": "R",
+        "t": "Rebuilt so completely after the rupture that no damage survives in the fabric. The absence of scarring is the evidence."
+      },
+      {
+        "s": "L",
+        "t": "That is exactly how it was put to me, word for word."
+      },
+      {
+        "s": "R",
+        "t": "You can date a clearance by how clean it is."
+      }
+    ],
+    "site-co-2": [
+      {
+        "s": "L",
+        "t": "The good air. It is bought, not zoned."
+      },
+      {
+        "s": "R",
+        "t": "Reinforced private frontage sitting directly over the pile cap shared with Sunyi."
+      },
+      {
+        "s": "L",
+        "t": "You can smell the difference from the water. I am not joking."
+      },
+      {
+        "s": "R",
+        "t": "Every terrace added there is measured in settlement across the channel."
+      }
+    ],
+    "site-co-3": [
+      {
+        "s": "L",
+        "t": "Built heavy on the far side, always. Do it the other way and the far shore suffers. Everyone knows that."
+      },
+      {
+        "s": "R",
+        "t": "Deliberate asymmetric loading, practised as custom with no reference to the engineering. The custom is correct; the reasoning was lost."
+      },
+      {
+        "s": "L",
+        "t": "Ask why and you get a shrug. It is just what is done."
+      },
+      {
+        "s": "R",
+        "t": "A correct practice with a forgotten cause is still a record of the cause."
+      }
+    ],
+    "site-co-4": [
+      {
+        "s": "L",
+        "t": "A second shrine, for those who would rather not face the public one."
+      },
+      {
+        "s": "R",
+        "t": "Privately funded, same nominal heading, independently surveyed — and out by one and a half degrees from the Core."
+      },
+      {
+        "s": "L",
+        "t": "Same direction. Different company."
+      },
+      {
+        "s": "R",
+        "t": "Both cannot be right. Neither will re-survey."
+      }
+    ],
+    "site-se-1": [
+      {
+        "s": "L",
+        "t": "The office that keeps the islands level. That is the whole of the public description."
+      },
+      {
+        "s": "R",
+        "t": "Statutory remit: detect and correct differential settlement. Actual function: hold the coupling data and decline to publish."
+      },
+      {
+        "s": "L",
+        "t": "Nobody I know has been inside."
+      },
+      {
+        "s": "R",
+        "t": "It is the only body that could prove the pairing, and the only one that will not."
+      }
+    ],
+    "site-se-2": [
+      {
+        "s": "L",
+        "t": "The old papers. Lost in a merger, they say, and nobody has ever named the company."
+      },
+      {
+        "s": "R",
+        "t": "Original contractor records. Proprietary when filed, unclaimed after dissolution, sealed by default rather than by decision."
+      },
+      {
+        "s": "L",
+        "t": "A story that has been told the same way for forty years."
+      },
+      {
+        "s": "R",
+        "t": "Not a conspiracy. An absence that nobody had standing to fill."
+      }
+    ],
+    "site-se-3": [
+      {
+        "s": "L",
+        "t": "You may build. The question is whether you may build heavy."
+      },
+      {
+        "s": "R",
+        "t": "Load consent issued here, silently checked against the paired island\\u2019s current settlement figure."
+      },
+      {
+        "s": "L",
+        "t": "Light construction, no trouble. Heavy, and the file goes quiet."
+      },
+      {
+        "s": "R",
+        "t": "The check is not written into any statute I can find."
+      }
+    ],
+    "site-se-4": [
+      {
+        "s": "L",
+        "t": "Its twin is across the water. Children are told they are talking to each other."
+      },
+      {
+        "s": "R",
+        "t": "Paired inclinometer to the Interzone station. This pairing is what the folk account describes correctly and explains wrongly."
+      },
+      {
+        "s": "L",
+        "t": "A nice story. It happens to be true."
+      },
+      {
+        "s": "R",
+        "t": "They got the mechanism right and lost the reason. That is usually the order."
+      }
+    ],
+    "span-a": [
+      {
+        "s": "L",
+        "t": "You do not walk this one for pleasure. There is one reason to be on it, in either direction."
+      },
+      {
+        "s": "R",
+        "t": "Single carriageway, checkpointed both landings. Every span terminates at the Core, so all movement passes the Judiciary."
+      },
+      {
+        "s": "L",
+        "t": "Empty most days. Never quiet."
+      },
+      {
+        "s": "R",
+        "t": "There is no route between two outer islands. By design."
+      }
+    ],
+    "span-b": [
+      {
+        "s": "L",
+        "t": "The newcomers\\u2019 road. Widened twice and still not wide enough."
+      },
+      {
+        "s": "R",
+        "t": "Highest-volume span. Rebuilt after partial collapse; the replacement deck is a different width and the join is visible."
+      },
+      {
+        "s": "L",
+        "t": "Everything that arrives here crosses it eventually."
+      },
+      {
+        "s": "R",
+        "t": "No collapse appears in any record I have access to."
+      }
+    ],
+    "span-c": [
+      {
+        "s": "L",
+        "t": "Quiet, well kept, and busier than it looks."
+      },
+      {
+        "s": "R",
+        "t": "Privately maintained under concession. Load-restricted — stated as a deck limit, actually a ballast limit."
+      },
+      {
+        "s": "L",
+        "t": "The gate is open. It is simply never used by us."
+      },
+      {
+        "s": "R",
+        "t": "A deck that grade could carry three times the posted figure."
+      }
+    ],
+    "span-d": [
+      {
+        "s": "L",
+        "t": "The paperwork road."
+      },
+      {
+        "s": "R",
+        "t": "Administrative link carrying the tilt telemetry conduit beside the roadway. The conduit is why the footing is oversized."
+      },
+      {
+        "s": "L",
+        "t": "Two lanes of forms, going both ways."
+      },
+      {
+        "s": "R",
+        "t": "The data crosses. The findings never do."
+      }
+    ]
+  },
+  "intro": [
+    {
+      "s": "R",
+      "t": "Five reclamations on one engineered seabed. Charted by the Eastern Shoals Company, numbered by the Protectorate, claimed now by two states that do not recognise each other."
+    },
+    {
+      "s": "L",
+      "t": "Nobody here says it like that. Pick a place off the chart and I will tell you what people say about it."
+    }
+  ]
+}

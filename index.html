@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REMEMBRANCE ARCHIPELAGO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div id="hdr">
+  <div class="bar frame olive">
+    <span class="t px">REMEMBRANCE ARCHIPELAGO</span>
+  </div>
+</div>
+
+<div id="main">
+  <div id="mapframe" class="frame">
+    <canvas id="c"></canvas>
+    <div id="maphint">SELECT AN ISLAND OR CLICK A MARKER</div>
+    <div id="boot" class="px">LOADING CHART</div>
+  </div>
+</div>
+
+<div id="lower">
+  <div id="viewbox" class="frame">
+    <div class="hd px">VIEW</div>
+    <div class="body"><canvas id="sv"></canvas></div>
+  </div>
+
+  <div id="svbox" class="frame">
+    <div class="hd px">SITE</div>
+    <div class="split">
+      <div class="menu sitelist" id="slist"></div>
+      <div class="facts" id="info"></div>
+    </div>
+  </div>
+
+  <div id="talkbox" class="frame">
+    <div class="hd px">CODEC</div>
+    <div class="talkrow">
+      <div class="port" id="portL">
+        <canvas id="pL" width="64" height="64"></canvas>
+        <div class="nm" id="nmL"></div>
+      </div>
+      <div class="speech">
+        <div class="who px" id="who"></div>
+        <div class="line" id="line"></div>
+        <div class="adv px" id="adv"></div>
+      </div>
+      <div class="port" id="portR">
+        <canvas id="pR" width="64" height="64"></canvas>
+        <div class="nm" id="nmR"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
