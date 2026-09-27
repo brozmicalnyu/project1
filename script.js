@@ -227,6 +227,26 @@ window.addEventListener('resize',resize);
 function hsh(a,b){ let h=Math.imul(a|0,374761393)^Math.imul(b|0,668265263);
   h=Math.imul(h^(h>>>13),1274126177); return ((h^(h>>>16))>>>0)/4294967296; }
 
+/* ---- real site-view images, one per id, with procedural fallback ----
+   If views/<id>.png exists it is drawn as-is (nearest-neighbour scaled to
+   the panel). Anything without a file falls through to the generated
+   elevation below, so sites can be swapped in one at a time. */
+const FOCAL={};  // e.g. FOCAL['site-re-1']={x:0.49,y:0.5}
+const VIEW_IMAGES={};
+function viewSrc(id){ return 'views/'+id+'.png'; }
+
+function ensureView(id){
+  let rec=VIEW_IMAGES[id];
+  if(rec) return rec;
+  rec={status:'pending', img:null};
+  VIEW_IMAGES[id]=rec;
+  const img=new Image();
+  img.onload =()=>{ rec.status='ok';    rec.img=img; if(sel && sel.o && sel.o.id===id) drawSiteView(); };
+  img.onerror=()=>{ rec.status='error'; if(sel && sel.o && sel.o.id===id) drawSiteView(); };
+  img.src=viewSrc(id);
+  return rec;
+}
+
 function drawSiteView(){
   const W=sv.width, H=sv.height;
   svx.imageSmoothingEnabled=false;
@@ -243,6 +263,28 @@ function drawSiteView(){
   }
 
   const o=sel.o, d=DISTRICTS[sel.d], seed=(sel.d+1)*97+o.name.length*13+o.n.charCodeAt(0);
+
+  const view=ensureView(o.id);
+  if(view.status==='ok'){
+    svx.imageSmoothingEnabled=false;
+    svx.fillStyle='#000'; svx.fillRect(0,0,W,H);
+
+    // centre cover-crop: scale so the image fully fills the panel on its
+    // shorter axis, then crop whatever overhangs on the longer one, taken
+    // equally off both sides. Source images are drawn wide (320x180-ish)
+    // with their subject centred, so the crop trims background, not it.
+    const subj=view.img;
+    const scale=Math.max(W/subj.width, H/subj.height);
+    const dw=subj.width*scale, dh=subj.height*scale;
+    // crop centres on the subject's own focal point (default dead-centre);
+    // with the panel now locked to the same 16:9 as the source images this
+    // rarely has anything to trim, but it's here for anything off-ratio
+    const focal = FOCAL[o.id] || {x:0.5, y:0.5};
+    const dx = -(dw-W)*focal.x, dy = -(dh-H)*focal.y;
+    svx.drawImage(subj, dx, dy, dw, dh);
+    return;
+  }
+
   const px=Math.max(2,Math.round(Math.min(W,H)/56));
   const horizon=Math.round(H*0.58);
   const tn=TONE[sel.d];
@@ -457,49 +499,15 @@ canvas.addEventListener('click',e=>{
 });
 
 function buildMenus(){
-  let h='';
-  if(!sel){
-    // nothing chosen: prompt only, no list of islands
-    h = '';
-  } else {
-    // an island is in play: it heads the list, its sites and spans follow
-    const d=DISTRICTS[sel.d];
-    h = '<div data-k="d'+sel.d+'" class="'+(sel.kind==='district'?'on':'')+'">'
-      + '<span class="cur px">'+(sel.kind==='district'?'\u25b6':'')+'</span>'
-      + '<span class="chip '+(sel.d%2?'dith25':'dith50')+'"></span>'
-      + '<span class="px">'+d.name+'</span></div>';
-    POI.forEach((p,i)=>{
-      if(p.d!==sel.d) return;
-      const on = sel.key==='p'+i;
-      h += '<div class="sub '+(on?'on':'')+'" data-k="p'+i+'">'
-        + '<span class="cur px">'+(on?'\u25b6':'')+'</span>'
-        + '<span class="px">'+p.n+'</span><span class="px">'+p.name+'</span></div>';
-    });
-    BRIDGES.forEach((b,i)=>{
-      if(b.to!==sel.d && sel.d!==0) return;
-      const on = sel.key==='b'+i;
-      h += '<div class="sub '+(on?'on':'')+'" data-k="b'+i+'">'
-        + '<span class="cur px">'+(on?'\u25b6':'')+'</span>'
-        + '<span class="px">'+b.n+'</span><span class="px">'+b.name+'</span></div>';
-    });
-    h += '<div class="back" data-k="back"><span class="cur px"></span><span class="px">\u25c0 ALL ISLANDS</span></div>';
-  }
-  document.getElementById('slist').innerHTML = h;
-
+  // no clickable list any more — navigation is by clicking the chart itself.
+  // this just keeps the hint strip in the map's corner up to date.
   const hint=document.getElementById('maphint');
   if(hint){
     hint.textContent = !sel ? 'SELECT AN ISLAND OR CLICK A MARKER'
       : sel.kind==='district' ? 'SELECT A SITE, OR CLICK A MARKER ON THE CHART'
       : sel.o.name + '  \u2014  ' + DISTRICTS[sel.d].name;
   }
-  document.querySelectorAll('.menu div[data-k]').forEach(el=>{
-    el.addEventListener('click',()=>{
-      if(el.dataset.k==='back'){ clearSel(); return; }
-      pick(el.dataset.k);
-    });
-  });
 }
-
 function clearSel(){
   sel=null; paintSheet(); draw(); drawSiteView(); buildMenus(); renderInfo(); say();
 }
