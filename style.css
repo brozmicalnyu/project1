@@ -61,7 +61,7 @@ body{
 #viewbox{ width:214px; flex:none; display:flex; flex-direction:column; }
 #viewbox .body{ flex:1; position:relative; overflow:hidden; background:var(--g0); }
 #viewbox canvas{ position:absolute; inset:0; width:100%; height:100%; image-rendering:pixelated; }
-#svbox{ flex:1; min-width:0; display:flex; flex-direction:column; }
+#svbox{ flex:1 1 0; max-width:50%; min-width:0; display:flex; flex-direction:column; }
 .split{ flex:1; display:flex; min-height:0; }
 
 .facts{ flex:1; min-width:0; overflow-y:auto; padding:10px 13px 12px; }
