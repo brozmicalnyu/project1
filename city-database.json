@@ -6,21 +6,17 @@
     "island-sw": "Named under Protectorate survey. The name has stood without amendment since.",
     "island-se": "The name in current administrative use. An earlier name remains in circulation on charts from the other claimant.",
     "site-re-1": "Four fingers made from ruin reaching into the sky\na skeletal hand, victim of unknown conflict\na site for a communion ungrasped\na gesture from a time unremembered\na fifth finger excised.\n\nThe central landmark of Remembrance, the Void is a sacred, taboo site for both the Republic and the Remembered. Each believes it to be the location of a key battle during the war of the Redaction. Neither can recall its significance, nor what structures stood there before.",
-    "site-re-2": "Raised in the Occupation era to cover the strait. Retained afterward for want of a reason to take it down.",
-    "site-re-3": "Rebuilt on the same footprint twice. Both times, facing the Void.",
-    "site-re-4": "Unrecorded in the founding survey. It appears first in a maintenance log, already old.",
-    "site-su-1": "Logged only as tonnage received. No register of names was ever kept here.",
-    "site-su-2": "Built to a fixed plan under Protectorate ordinance. The plan has not been revised since.",
-    "site-su-3": "One of a matched pair. Its readings are filed and have not been published.",
-    "site-su-4": "The point at which the island stops appearing on the civic register. No structure marks it.",
-    "site-th-1": "The oldest working structure in the archipelago. Rebuilt in place, never relocated.",
-    "site-th-2": "Determinations made here are executed on Sempadan Jaya. The two offices have never shared a file.",
-    "site-th-3": "Left deliberately unbuilt. The emptiness appears in the original specification, not as an oversight.",
-    "site-th-4": "A surveyed stone, placed to mark the seeker's forward limit. Its position has not been re-checked.",
-    "site-co-1": "Rebuilt in full after the rupture. No structural record from before that date survives on file.",
-    "site-co-2": "Private frontage, reinforced after the rupture. Sits above ground shared with Sunyi.",
-    "site-co-3": "Maintained by custom rather than ordinance. No engineering rationale is recorded for the practice.",
-    "site-co-4": "A private commission, independently surveyed. Its heading has never been reconciled with the Core's.",
+    "site-re-2": "The Watchtower stands as a pointed finger\nBeckoning towards distant shores or\nOstracizing those who linger\nA cypher once stood here, now unmade and unread.\nOne hand waves ships in. The same hand waves them off.\n\nThis lone watchtower is Remembrance's oldest structure, raised soon after the Company's charting to watch the channel for incoming vessels. Built over a now-lost Lanting monument, the tower now maintains two crews, each operating different shifts using different stairways for entry. The Republic crews control immigration, and observe and welcome new immigrants from the Interzone, while a Remembered team covertly controls expulsion, marking those to be driven out.",
+    "site-ne-1": "Logged only as tonnage received. No register of names was ever kept here.",
+    "site-ne-2": "Built to a fixed plan under Protectorate ordinance. The plan has not been revised since.",
+    "site-ne-3": "One of a matched pair. Its readings are filed and have not been published.",
+    "site-ne-4": "The point at which the island stops appearing on the civic register. No structure marks it.",
+    "site-nw-1": "Its name is the place between\na dark road for the Remembered\na drowned ruin that rises with the tide.\nTwo brothers raised four islands\nA fifth one now held up, awoken\n\nThe marshland known to locals as the Low Spaces is built upon Lanting-era megaliths, the burial sites of the islands' mythical founders, a pair of divine snake twins who raised the islands from the sea. Rumoured to be haunted, its impenetrable mangrove serves smugglers as a route: books come in and (___) is carried out.",
+    "site-nw-2": "Determinations made here are executed on Sempadan Jaya. The two offices have never shared a file.",
+    "site-nw-3": "Left deliberately unbuilt. The emptiness appears in the original specification, not as an oversight.",
+    "site-sw-1": "Rebuilt in full after the rupture. No structural record from before that date survives on file.",
+    "site-sw-2": "Private frontage, reinforced after the rupture. Sits above ground shared with Sunyi.",
+    "site-sw-3": "Maintained by custom rather than ordinance. No engineering rationale is recorded for the practice.",
     "site-se-1": "Established to monitor settlement across the archipelago. Its findings are not a matter of public record.",
     "site-se-2": "Contractor records, unclaimed after dissolution. Sealed by default, not by order.",
     "site-se-3": "Issues consent for construction. Heavy load applications are subject to an unwritten review.",
@@ -91,59 +87,35 @@
     ],
     "site-re-2": [
       {
-        "s": "L",
-        "t": "The eye. Everyone knows which way it faces. No one agrees on whether it is looking."
-      },
-      {
         "s": "R",
-        "t": "Electro-optical turret, fixed forward cone over Sunyi and the Interzone. The rear pair sit permanently outside its field of view."
+        "t": "Satellite images log it as an immigration post, but it looks pretty strange from here."
       },
       {
         "s": "L",
-        "t": "My mother waved at it once. For luck, she said."
+        "t": "Two staircases, right?"
       },
       {
         "s": "R",
-        "t": "That blind arc is worth more than any deed on Concord."
+        "t": "Yes — also, research indicates it's built on top of an old Lanting monument. A harbour marker of some kind."
+      },
+      {
+        "s": "L",
+        "t": "Hmm... my grandmother used to say it was two winding snakes. But nowadays the Republic and the Remembered use both entries for different purposes. The Republic to monitor the right kind of people in, and the Remembered to keep foreigners out."
+      },
+      {
+        "s": "R",
+        "t": "Snakes.... SNAAKKKE... sorry, I hate snakes."
+      },
+      {
+        "s": "L",
+        "t": "Right, so — two snakes?"
+      },
+      {
+        "s": "R",
+        "t": "Just like... the Double Helix, right? It's everywhere once you start looking — caduceus, ouroboros pairs, twin serpents wound around a staff. DNA itself, obviously. Something about two things spiraling around each other and never quite touching keeps showing up whenever people try to draw two forces that are opposed and inseparable at the same time."
       }
     ],
-    "site-re-3": [
-      {
-        "s": "L",
-        "t": "Judgement is made before you arrive. The hearing is for your benefit, not theirs."
-      },
-      {
-        "s": "R",
-        "t": "Classification hardware. Pre-sorts every case before a human opens the file; the human stage is review, not decision."
-      },
-      {
-        "s": "L",
-        "t": "Nobody has ever been surprised by a verdict here."
-      },
-      {
-        "s": "R",
-        "t": "It was built facing the Void. Read into that what you like."
-      }
-    ],
-    "site-re-4": [
-      {
-        "s": "L",
-        "t": "You face it. That is the whole of the practice. Nothing has ever answered and nothing is expected to."
-      },
-      {
-        "s": "R",
-        "t": "Hardened control link, fixed 300 degrees, toward an operator whose status — live, dark, one-way — the archipelago has no means of establishing."
-      },
-      {
-        "s": "L",
-        "t": "Asking whether anyone is out there — that is the rude question."
-      },
-      {
-        "s": "R",
-        "t": "The link log has not been opened since the concession lapsed."
-      }
-    ],
-    "site-su-1": [
+    "site-ne-1": [
       {
         "s": "L",
         "t": "The gate everyone passes and nobody describes afterwards."
@@ -161,7 +133,7 @@
         "t": "People counted as ballast. That is not a metaphor here."
       }
     ],
-    "site-su-2": [
+    "site-ne-2": [
       {
         "s": "L",
         "t": "Identical, and counted daily. The count is the day."
@@ -179,7 +151,7 @@
         "t": "The ordinance does not say why. It never has."
       }
     ],
-    "site-su-3": [
+    "site-ne-3": [
       {
         "s": "L",
         "t": "The little hut nobody staffs. Old people touch the wall when they pass it."
@@ -197,7 +169,7 @@
         "t": "I requested the series four times. Four refusals, no reason given."
       }
     ],
-    "site-su-4": [
+    "site-ne-4": [
       {
         "s": "L",
         "t": "There is no fourth island. Ask at the Registry and they will tell you so politely."
@@ -215,25 +187,45 @@
         "t": "The numeral was retired rather than reassigned. Deliberate."
       }
     ],
-    "site-th-1": [
-      {
-        "s": "L",
-        "t": "Where you wait. Some waited so long the waiting became the address."
-      },
+    "site-nw-1": [
       {
         "s": "R",
-        "t": "Primary landing, inside the forward cone. Arrival is recorded optically before any document is presented."
+        "t": "The chart shows a tidal flat here. Satellite images show boats coming in and out."
       },
       {
         "s": "L",
-        "t": "I was born two hundred metres from here. Still not on a roll."
+        "t": "Boats go a lot of places."
       },
       {
         "s": "R",
-        "t": "You are processed before you are asked anything."
+        "t": "Sorry, I'm just trying to understand the smuggling route. That's a lot of mangrove to be nothing."
+      },
+      {
+        "s": "L",
+        "t": "We say passage."
+      },
+      {
+        "s": "R",
+        "t": "Passage. Okay. Passage of what?"
+      },
+      {
+        "s": "L",
+        "t": "Books, mostly."
+      },
+      {
+        "s": "R",
+        "t": "And going the other way?"
+      },
+      {
+        "s": "L",
+        "t": "(___)"
+      },
+      {
+        "s": "R",
+        "t": "Rawi?"
       }
     ],
-    "site-th-2": [
+    "site-nw-2": [
       {
         "s": "L",
         "t": "Everything is decided here by people who will never see where you are sent."
@@ -251,7 +243,7 @@
         "t": "Two authorities, no shared jurisdiction, and it functions perfectly."
       }
     ],
-    "site-th-3": [
+    "site-nw-3": [
       {
         "s": "L",
         "t": "Open ground, no shade, and a line that moves at the pace of the sea."
@@ -269,25 +261,7 @@
         "t": "The emptiness is the instrument. It was designed empty."
       }
     ],
-    "site-th-4": [
-      {
-        "s": "L",
-        "t": "Past this stone you are seen. Before it, so they say, you are only likely to be."
-      },
-      {
-        "s": "R",
-        "t": "Surveyed limit of the seeker\\u2019s forward arc. The marker is ceremonial; the arc is not."
-      },
-      {
-        "s": "L",
-        "t": "Children dare each other across it. Always have."
-      },
-      {
-        "s": "R",
-        "t": "The stone is thirty metres off. Nobody has moved it."
-      }
-    ],
-    "site-co-1": [
+    "site-sw-1": [
       {
         "s": "L",
         "t": "Nothing happened here. You can see that nothing happened here."
@@ -305,7 +279,7 @@
         "t": "You can date a clearance by how clean it is."
       }
     ],
-    "site-co-2": [
+    "site-sw-2": [
       {
         "s": "L",
         "t": "The good air. It is bought, not zoned."
@@ -323,7 +297,7 @@
         "t": "Every terrace added there is measured in settlement across the channel."
       }
     ],
-    "site-co-3": [
+    "site-sw-3": [
       {
         "s": "L",
         "t": "Built heavy on the far side, always. Do it the other way and the far shore suffers. Everyone knows that."
@@ -339,24 +313,6 @@
       {
         "s": "R",
         "t": "A correct practice with a forgotten cause is still a record of the cause."
-      }
-    ],
-    "site-co-4": [
-      {
-        "s": "L",
-        "t": "A second shrine, for those who would rather not face the public one."
-      },
-      {
-        "s": "R",
-        "t": "Privately funded, same nominal heading, independently surveyed — and out by one and a half degrees from the Core."
-      },
-      {
-        "s": "L",
-        "t": "Same direction. Different company."
-      },
-      {
-        "s": "R",
-        "t": "Both cannot be right. Neither will re-survey."
       }
     ],
     "site-se-1": [
@@ -438,7 +394,7 @@
       },
       {
         "s": "R",
-        "t": "Single carriageway, checkpointed both landings. Every span terminates at the Core, so all movement passes the Judiciary."
+        "t": "Single carriageway, checkpointed both landings. Every span terminates on Remembrance, so nothing moves between outer islands without passing through it."
       },
       {
         "s": "L",

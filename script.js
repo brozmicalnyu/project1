@@ -7,7 +7,7 @@ const MAP=1254;
 
 /* the two voices — names and roles still open */
 const SPEAKERS={
-  L:{ name:'RAWI', role:'lighter pilot,<br><span>the Interzone</span>' },
+  L:{ name:'RAWI', role:'smuggler boss,<br><span>the Interzone</span>' },
   R:{ name:'ADLER', role:'forensic architect,<br><span>off-island</span>' }
 };
 
@@ -30,11 +30,6 @@ const POI=[
    v:{status:'Unbuilt',built:'\u2014',area:'2.1 ha',access:'Open, unpaved'}},
   {d:0,n:'2',id:'site-re-2',x:604,y:522,name:'THE WATCHTOWER',role:'seeker turret',
    v:{status:'Operational',built:'Occupation era',area:'0.4 ha',access:'Restricted'}},
-  {d:0,n:'3',id:'site-re-3',x:712,y:672,name:'THE JUDICIARY',role:'recognition core',
-   v:{status:'Operational',built:'Protectorate, rebuilt',area:'1.2 ha',access:'By summons'}},
-  {d:0,n:'4',id:'site-re-4',x:539,y:583,name:'SHRINE OF THE BEARING',role:'datalink antenna',
-   v:{status:'Maintained',built:'Unrecorded',area:'0.3 ha',access:'Open'}},
-
   {d:1,n:'1',id:'site-ne-1',x:1008,y:200,name:'INTAKE YARD',role:'reception',
    v:{status:'Operational',built:'Protectorate',area:'3.6 ha',access:'Closed'}},
   {d:1,n:'2',id:'site-ne-2',x:1072,y:322,name:'THE LONG ROWS',role:'housing blocks',
@@ -44,24 +39,18 @@ const POI=[
   {d:1,n:'4',id:'site-ne-4',x:1090,y:240,name:'THE UNNAMED GATE',role:'civic omission',
    v:{status:'Administrative',built:'\u2014',area:'\u2014',access:'Not a structure'}},
 
-  {d:2,n:'1',id:'site-nw-1',x:170,y:212,name:'QUARANTINE PIER',role:'first landing',
-   v:{status:'Operational',built:'Company era',area:'1.8 ha',access:'Controlled'}},
-  {d:2,n:'2',id:'site-nw-2',x:300,y:214,name:'THE FORMS HALL',role:'processing',
+  {d:2,n:'1',id:'site-nw-1',x:76,y:247,name:'THE LOW SPACES',role:'tidal crossing',
+   v:{status:'Open ground',built:'Lanting era',area:'\u2014',access:'Slack water'}},
+  {d:2,n:'2',id:'site-nw-2',x:300,y:214,name:'THE EXAMINATION HALLS',role:'processing',
    v:{status:'Operational',built:'Protectorate',area:'2.2 ha',access:'Public, queued'}},
-  {d:2,n:'3',id:'site-nw-3',x:214,y:352,name:'SORTING GROUND',role:'holding',
+  {d:2,n:'3',id:'site-nw-3',x:214,y:352,name:'PORTSIDE',role:'holding market',
    v:{status:'Open ground',built:'\u2014',area:'5.9 ha',access:'Controlled'}},
-  {d:2,n:'4',id:'site-nw-4',x:330,y:330,name:'CONE MARKER',role:'surveillance boundary',
-   v:{status:'Marker',built:'Protectorate',area:'\u2014',access:'Open'}},
-
   {d:3,n:'1',id:'site-sw-1',x:200,y:912,name:'LEVELLED QUARTER',role:'total reconstruction',
    v:{status:'Rebuilt',built:'Post-rupture',area:'8.3 ha',access:'Private'}},
   {d:3,n:'2',id:'site-sw-2',x:330,y:934,name:'SEAWALL TERRACES',role:'private frontage',
    v:{status:'Occupied',built:'Post-rupture',area:'4.1 ha',access:'Private'}},
   {d:3,n:'3',id:'site-sw-3',x:214,y:1056,name:'COUNTERWEIGHT GARDENS',role:'vernacular ballast',
    v:{status:'Maintained',built:'Custom, undated',area:'6.7 ha',access:'Private'}},
-  {d:3,n:'4',id:'site-sw-4',x:346,y:1040,name:'CHAPEL OF BEARING',role:'private devotional',
-   v:{status:'In use',built:'Private commission',area:'0.2 ha',access:'Members'}},
-
   {d:4,n:'1',id:'site-se-1',x:952,y:912,name:'OVERSIGHT BUREAU',role:'tilt authority',
    v:{status:'Operational',built:'Present claimant',area:'1.5 ha',access:'Closed'}},
   {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE SEALED ARCHIVE',role:'reclamation records',
