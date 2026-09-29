@@ -9,16 +9,6 @@
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
-.dith50{
-  background-image:
-    linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%),
-    linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%);
-  background-size:2px 2px; background-position:0 0,1px 1px; background-color:#000;
-}
-.dith25{
-  background-image:radial-gradient(#fff 45%,transparent 46%);
-  background-size:2px 2px; background-color:#000;
-}
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 body{
@@ -30,13 +20,10 @@ body{
 .frame{ border:2px solid var(--g4); background:var(--g0); position:relative; }
 .frame.olive{ border-color:var(--g6); }
 .hd{ background:var(--g5); color:var(--g0); font-size:11px; padding:4px 8px; letter-spacing:.06em; }
-.hd.b{ background:var(--g3); color:var(--g6); }
 
 #hdr{ flex:none; display:flex; gap:7px; }
 #hdr .bar{ flex:1; background:var(--g6); color:var(--g0); padding:7px 12px; }
 #hdr .bar .t{ font-size:17px; letter-spacing:.05em; }
-#hdr .bar .r{ font-size:10px; color:var(--g0); opacity:.62; }
-#hdr .blk{ width:110px; background:var(--g2); color:var(--g6); font-size:10px; padding:6px; text-align:center; display:flex; align-items:center; justify-content:center; line-height:1.5; }
 
 /* chart fills its frame edge to edge, sea included */
 #main{ flex:1; display:flex; min-height:0; }
@@ -46,17 +33,8 @@ body{
   padding:4px 8px; font-size:10px; letter-spacing:.04em; }
 #mapframe canvas{ display:block; width:100%; height:100%; image-rendering:pixelated; cursor:crosshair; }
 
-.menu div{ font-size:11px; padding:4px 7px; cursor:pointer; display:flex; gap:7px; align-items:center; white-space:nowrap; }
-.menu div:hover{ background:var(--g2); }
-.menu div.on{ background:var(--g5); color:var(--g0); }
-.menu .cur{ width:9px; color:var(--g6); }
-.menu div.on .cur{ color:var(--blk); }
-.menu .chip{ width:9px; height:9px; flex:none; border:1px solid var(--g4); }
-
-
 /* ---- lower deck ---- */
 #lower{ height:268px; flex:none; display:flex; gap:7px; }
-
 
 #viewbox{ width:214px; flex:none; display:flex; flex-direction:column; }
 /* fills whatever height the row gives it, same as SITE and CODEC;
@@ -65,25 +43,14 @@ body{
 #viewbox .body{ flex:1; width:100%; position:relative; overflow:hidden; background:var(--g0); }
 #viewbox canvas{ position:absolute; inset:0; width:100%; height:100%; image-rendering:pixelated; }
 #svbox{ flex:1 1 0; max-width:50%; min-width:0; display:flex; flex-direction:column; }
-.split{ flex:1; display:flex; min-height:0; }
 
 .facts{ flex:1; min-width:0; overflow-y:auto; padding:10px 13px 12px; }
-.sitelist{ display:none; }
-.sitelist{ width:auto; max-width:250px; flex:none; overflow-y:auto; padding:6px 4px; border-right:2px solid var(--g2); }
-.sitelist .sub{ padding-left:20px; }
-.sitelist .back{ margin-top:6px; color:var(--g3); }
-.sitelist .empty{ padding:8px 6px; color:var(--g3); font-size:10px; line-height:1.7; white-space:normal; }
 
-
-
-
-
-.facts h4{ font-family:'DotGothic16',monospace; font-size:14px; color:var(--g6); margin-bottom:9px; }
-.facts .bd{ font-size:12px; line-height:1.85; color:var(--g5); max-width:56ch; }
+.facts .bd{ font-size:12px; line-height:1.85; color:var(--g5); max-width:56ch; white-space:pre-line; }
+.facts .verse{ font-size:12px; line-height:1.85; color:var(--g6); max-width:56ch; margin-bottom:1.85em; }
+.facts .verse .vl{ padding-left:1.5em; text-indent:-1.5em; }
 .facts .frag{ font-size:13px; line-height:1.9; color:var(--g5); font-style:italic; max-width:52ch; }
 .facts .src{ font-size:10px; font-style:normal; color:var(--g3); margin-top:8px; }
-.kv b{ color:var(--g6); font-weight:normal; }
-.kv .k{ color:var(--g3); }
 .facts h4{ font-size:11px; color:var(--g0); background:var(--g5); display:inline-block; padding:3px 5px; line-height:1.35; margin-bottom:8px; }
 
 #talkbox{ flex:1; min-width:380px; display:flex; flex-direction:column; }
@@ -99,10 +66,9 @@ body{
 .speech .line{ font-size:14px; line-height:1.78; color:var(--g6); flex:1; overflow-y:auto; }
 .speech .adv{ font-size:8px; color:var(--g3); margin-top:7px; }
 
-#boot{ font-size:11px; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+#boot{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
   background:var(--blk); color:var(--wht); font-size:9px; z-index:99; }
 @media (max-width:1040px){
-  
   #lower{ height:auto; flex-direction:column; }
   #viewbox{ width:100%; height:200px; }
   #svbox{ height:220px; max-width:100%; } #talkbox{ width:auto; }

@@ -13,7 +13,7 @@ const SPEAKERS={
 
 const DISTRICTS=[
   { id:'core', dbId:'island-core', name:'REMEMBRANCE', sub:'INGATAN' },
-  { id:'ne', dbId:'island-ne', name:'SUNYI', sub:'UNNAMED ON CHART' },
+  { id:'ne', dbId:'island-ne', name:'SILENCE', sub:'UNNAMED ON CHART' },
   { id:'nw', dbId:'island-nw', name:'THE INTERZONE', sub:'COMPANY ROADS' },
   { id:'sw', dbId:'island-sw', name:'CONCORD', sub:'PROTECTORATE NAME' },
   { id:'se', dbId:'island-se', name:'SEMPADAN JAYA', sub:'CONTESTED NAME' }
@@ -23,10 +23,8 @@ const POI=[
   {d:0,n:'1',id:'site-re-1',x:620,y:633,name:'THE VOID'},
   {d:0,n:'2',id:'site-re-2',x:604,y:522,name:'THE WATCHTOWER'},
 
-  {d:1,n:'1',id:'site-ne-1',x:1008,y:200,name:'INTAKE YARD'},
+  {d:1,n:'1',id:'site-ne-1',x:1020,y:265,name:'THE EYE'},
   {d:1,n:'2',id:'site-ne-2',x:1072,y:322,name:'THE LONG ROWS'},
-  {d:1,n:'3',id:'site-ne-3',x:930,y:352,name:'TILT STATION NE'},
-  {d:1,n:'4',id:'site-ne-4',x:1090,y:240,name:'THE UNNAMED GATE'},
 
   {d:2,n:'1',id:'site-nw-1',x:76,y:247,name:'THE LOW SPACES'},
   {d:2,n:'2',id:'site-nw-3',x:214,y:352,name:'PORTSIDE'},
@@ -313,7 +311,17 @@ function renderInfo(){
   const o=sel.o;
   const dbId = sel.kind==='district' ? o.dbId : o.id;
   const text = unread(DB.hist[dbId] || '', sel.kind==='district' ? 0 : unreadLevel);
-  el.innerHTML='<h4>'+o.name+'</h4><div class="bd">'+text+'</div>';
+  el.innerHTML='<h4>'+o.name+'</h4>'+siteBody(text);
+}
+
+/* SITE text is an optional verse, a blank line, then the neutral paragraph.
+   The verse gets one block per line, with a hanging indent so a line that
+   wraps in a narrow panel still reads as one line. */
+function siteBody(text){
+  const cut=text.indexOf('\n\n');
+  if(cut<0) return '<div class="bd">'+text+'</div>';
+  const verse=text.slice(0,cut).split('\n').map(l=>'<div class="vl">'+l+'</div>').join('');
+  return '<div class="verse">'+verse+'</div><div class="bd">'+text.slice(cut+2).trim()+'</div>';
 }
 
 /* ---- transcript: both voices, in sequence ---- */
