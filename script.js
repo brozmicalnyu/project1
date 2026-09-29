@@ -12,75 +12,49 @@ const SPEAKERS={
 };
 
 const DISTRICTS=[
-  { id:'core',dbId:'island-core', hk:'a', name:'REMEMBRANCE', sub:'INGATAN', role:'central religious ground', seed:[620,633], col:'#ffffff',
-    named:'Eastern Shoals Company, c.1740s', pair:'\u2014', cone:'origin of the cone' },
-  { id:'ne',dbId:'island-ne', hk:'b', name:'SUNYI', sub:'UNNAMED ON CHART', role:'detention', seed:[1000,281], col:'#ffffff',
-    named:'Lanting; no colonial name printed', pair:'CONCORD', cone:'inside the forward cone' },
-  { id:'nw',dbId:'island-nw', hk:'c', name:'THE INTERZONE', sub:'COMPANY ROADS', role:'arrivals, free zone', seed:[253,280], col:'#ffffff',
-    named:'Company customs status, inherited', pair:'SEMPADAN JAYA', cone:'inside the forward cone' },
-  { id:'sw',dbId:'island-sw', hk:'d', name:'CONCORD', sub:'PROTECTORATE NAME', role:'upper-class enclave', seed:[265,984], col:'#ffffff',
-    named:'Protectorate survey, virtue register', pair:'SUNYI', cone:'shielded' },
-  { id:'se',dbId:'island-se', hk:'e', name:'SEMPADAN JAYA', sub:'CONTESTED NAME', role:'government', seed:[995,987], col:'#ffffff',
-    named:'Present claimant; prior name withdrawn', pair:'THE INTERZONE', cone:'shielded' }
+  { id:'core', dbId:'island-core', name:'REMEMBRANCE', sub:'INGATAN' },
+  { id:'ne', dbId:'island-ne', name:'SUNYI', sub:'UNNAMED ON CHART' },
+  { id:'nw', dbId:'island-nw', name:'THE INTERZONE', sub:'COMPANY ROADS' },
+  { id:'sw', dbId:'island-sw', name:'CONCORD', sub:'PROTECTORATE NAME' },
+  { id:'se', dbId:'island-se', name:'SEMPADAN JAYA', sub:'CONTESTED NAME' }
 ];
 
-/* v = the neutral record: what both accounts agree on */
 const POI=[
-  {d:0,n:'1',id:'site-re-1',x:620,y:633,name:'THE VOID',role:'warhead site, unbuilt',
-   v:{status:'Unbuilt',built:'\u2014',area:'2.1 ha',access:'Open, unpaved'}},
-  {d:0,n:'2',id:'site-re-2',x:604,y:522,name:'THE WATCHTOWER',role:'seeker turret',
-   v:{status:'Operational',built:'Occupation era',area:'0.4 ha',access:'Restricted'}},
-  {d:1,n:'1',id:'site-ne-1',x:1008,y:200,name:'INTAKE YARD',role:'reception',
-   v:{status:'Operational',built:'Protectorate',area:'3.6 ha',access:'Closed'}},
-  {d:1,n:'2',id:'site-ne-2',x:1072,y:322,name:'THE LONG ROWS',role:'housing blocks',
-   v:{status:'Occupied',built:'Protectorate, extended',area:'11.4 ha',access:'Closed'}},
-  {d:1,n:'3',id:'site-ne-3',x:930,y:352,name:'TILT STATION NE',role:'ballast monitor',
-   v:{status:'Unstaffed',built:'Contractor era',area:'0.05 ha',access:'Locked'}},
-  {d:1,n:'4',id:'site-ne-4',x:1090,y:240,name:'THE UNNAMED GATE',role:'civic omission',
-   v:{status:'Administrative',built:'\u2014',area:'\u2014',access:'Not a structure'}},
+  {d:0,n:'1',id:'site-re-1',x:620,y:633,name:'THE VOID'},
+  {d:0,n:'2',id:'site-re-2',x:604,y:522,name:'THE WATCHTOWER'},
 
-  {d:2,n:'1',id:'site-nw-1',x:76,y:247,name:'THE LOW SPACES',role:'tidal crossing',
-   v:{status:'Open ground',built:'Lanting era',area:'\u2014',access:'Slack water'}},
-  {d:2,n:'2',id:'site-nw-2',x:300,y:214,name:'THE EXAMINATION HALLS',role:'processing',
-   v:{status:'Operational',built:'Protectorate',area:'2.2 ha',access:'Public, queued'}},
-  {d:2,n:'3',id:'site-nw-3',x:214,y:352,name:'PORTSIDE',role:'holding market',
-   v:{status:'Open ground',built:'\u2014',area:'5.9 ha',access:'Controlled'}},
-  {d:3,n:'1',id:'site-sw-1',x:200,y:912,name:'LEVELLED QUARTER',role:'total reconstruction',
-   v:{status:'Rebuilt',built:'Post-rupture',area:'8.3 ha',access:'Private'}},
-  {d:3,n:'2',id:'site-sw-2',x:330,y:934,name:'SEAWALL TERRACES',role:'private frontage',
-   v:{status:'Occupied',built:'Post-rupture',area:'4.1 ha',access:'Private'}},
-  {d:3,n:'3',id:'site-sw-3',x:214,y:1056,name:'COUNTERWEIGHT GARDENS',role:'vernacular ballast',
-   v:{status:'Maintained',built:'Custom, undated',area:'6.7 ha',access:'Private'}},
-  {d:4,n:'1',id:'site-se-1',x:952,y:912,name:'OVERSIGHT BUREAU',role:'tilt authority',
-   v:{status:'Operational',built:'Present claimant',area:'1.5 ha',access:'Closed'}},
-  {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE SEALED ARCHIVE',role:'reclamation records',
-   v:{status:'Sealed',built:'Contractor era',area:'0.9 ha',access:'None'}},
-  {d:4,n:'3',id:'site-se-3',x:960,y:1056,name:'PERMIT HALL',role:'building consent',
-   v:{status:'Operational',built:'Present claimant',area:'1.1 ha',access:'Public, queued'}},
-  {d:4,n:'4',id:'site-se-4',x:1084,y:1046,name:'TILT STATION SE',role:'ballast monitor',
-   v:{status:'Unstaffed',built:'Contractor era',area:'0.05 ha',access:'Locked'}}
+  {d:1,n:'1',id:'site-ne-1',x:1008,y:200,name:'INTAKE YARD'},
+  {d:1,n:'2',id:'site-ne-2',x:1072,y:322,name:'THE LONG ROWS'},
+  {d:1,n:'3',id:'site-ne-3',x:930,y:352,name:'TILT STATION NE'},
+  {d:1,n:'4',id:'site-ne-4',x:1090,y:240,name:'THE UNNAMED GATE'},
+
+  {d:2,n:'1',id:'site-nw-1',x:76,y:247,name:'THE LOW SPACES'},
+  {d:2,n:'2',id:'site-nw-3',x:214,y:352,name:'PORTSIDE'},
+
+  {d:3,n:'1',id:'site-sw-1',x:200,y:912,name:'LEVELLED QUARTER'},
+  {d:3,n:'2',id:'site-sw-2',x:330,y:934,name:'SEAWALL TERRACES'},
+  {d:3,n:'3',id:'site-sw-3',x:214,y:1056,name:'COUNTERWEIGHT GARDENS'},
+
+  {d:4,n:'1',id:'site-se-1',x:952,y:912,name:'OVERSIGHT BUREAU'},
+  {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE SEALED ARCHIVE'},
+  {d:4,n:'3',id:'site-se-3',x:960,y:1056,name:'PERMIT HALL'},
+  {d:4,n:'4',id:'site-se-4',x:1084,y:1046,name:'TILT STATION SE'}
 ];
 
 const BRIDGES=[
-  {n:'A',id:'span-a',x:810,y:457,to:1,name:'CAUSEWAY A',role:'remembrance \u2013 sunyi',
-   v:{status:'Operational',built:'Protectorate',area:'1.9 km span',access:'Checkpointed'}},
-  {n:'B',id:'span-b',x:436,y:456,to:2,name:'CAUSEWAY B',role:'remembrance \u2013 interzone',
-   v:{status:'Operational',built:'Company, rebuilt',area:'1.8 km span',access:'Open'}},
-  {n:'C',id:'span-c',x:442,y:808,to:3,name:'CAUSEWAY C',role:'remembrance \u2013 concord',
-   v:{status:'Operational',built:'Concession',area:'1.8 km span',access:'Load-restricted'}},
-  {n:'D',id:'span-d',x:807,y:810,to:4,name:'CAUSEWAY D',role:'remembrance \u2013 sempadan jaya',
-   v:{status:'Operational',built:'Present claimant',area:'1.9 km span',access:'Open'}}
+  {n:'A',id:'span-a',x:810,y:457,to:1,name:'CAUSEWAY A'},
+  {n:'B',id:'span-b',x:436,y:456,to:2,name:'CAUSEWAY B'},
+  {n:'C',id:'span-c',x:442,y:808,to:3,name:'CAUSEWAY C'},
+  {n:'D',id:'span-d',x:807,y:810,to:4,name:'CAUSEWAY D'}
 ];
 
 /* ================= engine ================= */
-const SEA=0, LAND=1, BUILT=2, ROAD=3;
 /* ---- content database ----
    All authored text (site history notes + codec dialogue) lives in
    city-database.json, fetched at startup, rather than inline in this file.
    Falls back to a short notice if the fetch fails (e.g. opened as a bare
    local file rather than served). */
 let DB = { hist:{}, dialogue:{}, intro:[] };
-let dbReady = false;
 async function loadDB(){
   try{
     const res = await fetch('city-database.json');
@@ -89,31 +63,47 @@ async function loadDB(){
   } catch(e){
     console.warn('city-database.json not loaded (', e, ') — serve this folder over http(s) rather than opening the file directly.');
   }
-  dbReady = true;
 }
 
 const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
 const frame=document.getElementById('mapframe');
 const sv=document.getElementById('sv'), svx=sv.getContext('2d');
-let N=0, cells=null, owner=null, sheet=null;
+let N=0, sheet=null, lit=null;
 let sel=null;
+
+/* ---- islands are defined by mask pictures, not by code ----
+   masks/island-<id>.png is the same size as armature.png: opaque where that
+   island is, transparent everywhere else. Edit them in Photoshop to change
+   where an island's edges fall. They do two jobs: working out which island
+   a click landed on, and keeping the selected island lit while the rest of
+   the map dims. A missing mask just means that island can't be selected. */
+const MASKS=[];                                   // MASKS[k] belongs to DISTRICTS[k]
+function maskSrc(k){ return 'masks/'+DISTRICTS[k].dbId+'.png'; }
+function loadImage(src){
+  return new Promise(res=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src; });
+}
+
+const probe=document.createElement('canvas'); probe.width=probe.height=1;
+const probeX=probe.getContext('2d',{willReadFrequently:true});
+function islandAt(x,y){                            // which island is this map pixel on? -1 for none
+  for(let k=0;k<MASKS.length;k++){
+    if(!MASKS[k]) continue;
+    probeX.clearRect(0,0,1,1);
+    probeX.drawImage(MASKS[k], x,y,1,1, 0,0,1,1);
+    if(probeX.getImageData(0,0,1,1).data[3]>0) return k;
+  }
+  return -1;
+}
 
 const dbLoad = loadDB();
 const img=new Image();
 img.onload=async ()=>{
   await dbLoad;
   N=img.width;
-  const off=document.createElement('canvas'); off.width=N; off.height=N;
-  const oc=off.getContext('2d',{willReadFrequently:true});
-  oc.drawImage(img,0,0);
-  const d=oc.getImageData(0,0,N,N).data;
-  cells=new Uint8Array(N*N);
-  for(let i=0;i<N*N;i++){
-    const v=(d[i*4]+d[i*4+1]+d[i*4+2])/3;
-    cells[i]= v<43?BUILT : v<128?SEA : v<213?ROAD : LAND;
-  }
-  partition();
+  const found=await Promise.all(DISTRICTS.map((d,k)=>loadImage(maskSrc(k))));
+  found.forEach((m,k)=>{ MASKS[k]=m; });
   sheet=document.createElement('canvas'); sheet.width=N; sheet.height=N;
+  lit=document.createElement('canvas');   lit.width=N;   lit.height=N;
   paintSheet();
   drawPortraits(); buildMenus(); renderInfo(); say();
   document.getElementById('boot').remove();
@@ -121,60 +111,27 @@ img.onload=async ()=>{
 };
 img.src='armature.png';
 
-function partition(){
-  owner=new Int8Array(N*N).fill(-1);
-  const q=new Int32Array(N*N); let h=0,t=0;
-  DISTRICTS.forEach((dd,k)=>{
-    let [sx,sy]=dd.seed;
-    if(cells[sy*N+sx]===SEA){
-      outer: for(let r=1;r<70;r++)
-        for(let oy=-r;oy<=r;oy++) for(let ox=-r;ox<=r;ox++){
-          const nx=sx+ox, ny=sy+oy;
-          if(nx<0||ny<0||nx>=N||ny>=N) continue;
-          if(cells[ny*N+nx]!==SEA){ sx=nx; sy=ny; break outer; }
-        }
-    }
-    const i=sy*N+sx; owner[i]=k; q[t++]=i;
-  });
-  while(h<t){
-    const i=q[h++], k=owner[i], x=i%N, y=(i/N)|0;
-    if(x>0){const j=i-1; if(cells[j]!==SEA&&owner[j]<0){owner[j]=k;q[t++]=j;}}
-    if(x<N-1){const j=i+1; if(cells[j]!==SEA&&owner[j]<0){owner[j]=k;q[t++]=j;}}
-    if(y>0){const j=i-N; if(cells[j]!==SEA&&owner[j]<0){owner[j]=k;q[t++]=j;}}
-    if(y<N-1){const j=i+N; if(cells[j]!==SEA&&owner[j]<0){owner[j]=k;q[t++]=j;}}
-  }
-}
 /* ---- the chart is the uploaded plan ----
    Its own four values are kept as drawn: sea #555, ground white, roads
-   #aaa, buildings black. Selection only dims what is not selected; nothing
-   is re-toned or re-textured.                                            */
+   #aaa, buildings black. Selecting something dims everything except that
+   island; nothing is re-toned or re-textured.                              */
 const BAYER=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
 function dith(x,y,d){ return BAYER[y&3][x&3] < d; }
 
-const BASE={ sea:85, land:255, road:170, built:0 };
-const TONE=[
-  {land:255, road:170, built:0},
-  {land:255, road:170, built:0},
-  {land:255, road:170, built:0},
-  {land:255, road:170, built:0},
-  {land:255, road:170, built:0}
-];
-
 function paintSheet(){
-  const sc=sheet.getContext('2d'), im=sc.createImageData(N,N);
-  const hi = sel ? sel.d : null;
-  for(let i=0;i<N*N;i++){
-    const t=cells[i], k=owner[i];
-    let v = t===SEA ? BASE.sea : t===LAND ? BASE.land : t===ROAD ? BASE.road : BASE.built;
-    if(hi!==null){
-      if(t===SEA) v=(v*0.48)|0;
-      else if(k!==hi) v = t===BUILT ? 0 : (v*0.42)|0;   // unselected islands recede
-      // the selected island keeps the plan's own values, untouched
-    }
-    im.data[i*4]=v; im.data[i*4+1]=v; im.data[i*4+2]=v; im.data[i*4+3]=255;
-  }
-  sc.putImageData(im,0,0);
-
+  const sc=sheet.getContext('2d');
+  sc.clearRect(0,0,N,N);
+  sc.drawImage(img,0,0);                          // the plan, exactly as drawn
+  if(!sel || !MASKS[sel.d]) return;
+  sc.fillStyle='rgba(0,0,0,0.55)';                // dim everything...
+  sc.fillRect(0,0,N,N);
+  const lc=lit.getContext('2d');                  // ...then put the selected island back at full strength
+  lc.globalCompositeOperation='source-over';
+  lc.clearRect(0,0,N,N);
+  lc.drawImage(img,0,0);
+  lc.globalCompositeOperation='destination-in';
+  lc.drawImage(MASKS[sel.d],0,0);
+  sc.drawImage(lit,0,0);
 }
 
 /* the chart is letterboxed into its frame, sea filling the remainder */
@@ -232,14 +189,9 @@ function resize(){
 }
 window.addEventListener('resize',resize);
 
-/* ---- site view: a pixel-art elevation, built from the site's own facts ---- */
-function hsh(a,b){ let h=Math.imul(a|0,374761393)^Math.imul(b|0,668265263);
-  h=Math.imul(h^(h>>>13),1274126177); return ((h^(h>>>16))>>>0)/4294967296; }
-
-/* ---- real site-view images, one per id, with procedural fallback ----
-   If views/<id>.png exists it is drawn as-is (nearest-neighbour scaled to
-   the panel). Anything without a file falls through to the generated
-   elevation below, so sites can be swapped in one at a time. */
+/* ---- site-view images, one per id ----
+   views/<id>.png is drawn if it exists. A site without a file shows a
+   dithered card with its name, so images can be added one at a time. */
 const FOCAL={};  // e.g. FOCAL['site-re-1']={x:0.49,y:0.5}
 const VIEW_IMAGES={};
 function viewSrc(id){ return 'views/'+id+'.png'; }
@@ -259,106 +211,38 @@ function ensureView(id){
 function drawSiteView(){
   const W=sv.width, H=sv.height;
   svx.imageSmoothingEnabled=false;
-  const g=(v)=>'rgb('+v+','+v+','+v+')';
-  svx.fillStyle=g(12); svx.fillRect(0,0,W,H);
+  svx.fillStyle='rgb(12,12,12)'; svx.fillRect(0,0,W,H);
 
-  if(!sel || sel.kind==='district'){
+  // a dithered card with a caption: nothing selected, an island selected,
+  // or a site that has no image yet
+  const card=(label)=>{
+    svx.fillStyle='rgb(56,56,56)';
     for(let y=0;y<H;y++) for(let x=0;x<W;x++)
-      if(dith(x,y,3)){ svx.fillStyle=g(56); svx.fillRect(x,y,1,1); }
-    svx.fillStyle=g(0); svx.fillRect(0,(H>>1)-11,W,22);
-    svx.fillStyle=g(200); svx.font='8px DotGothic16, monospace'; svx.textAlign='center';
-    svx.fillText(sel?sel.o.name:'NO SITE SELECTED', W/2, (H>>1)+3);
-    return;
-  }
+      if(dith(x,y,3)) svx.fillRect(x,y,1,1);
+    svx.fillStyle='#000'; svx.fillRect(0,(H>>1)-11,W,22);
+    svx.fillStyle='rgb(200,200,200)'; svx.font='8px DotGothic16, monospace'; svx.textAlign='center';
+    svx.fillText(label, W/2, (H>>1)+3);
+  };
 
-  const o=sel.o, d=DISTRICTS[sel.d], seed=(sel.d+1)*97+o.name.length*13+o.n.charCodeAt(0);
+  if(!sel){ card('NO SITE SELECTED'); return; }
+  if(sel.kind==='district'){ card(sel.o.name); return; }
 
+  const o=sel.o;
   const view=ensureView(o.id);
-  if(view.status==='ok'){
-    svx.imageSmoothingEnabled=false;
-    svx.fillStyle='#000'; svx.fillRect(0,0,W,H);
+  if(view.status==='pending') return;                // stay dark until the file arrives, so a site with an image never flashes the card
+  if(view.status!=='ok'){ card(o.name); return; }    // no image for this site yet
 
-    // centre cover-crop: scale so the image fully fills the panel on its
-    // shorter axis, then crop whatever overhangs on the longer one, taken
-    // equally off both sides. Source images are drawn wide (320x180-ish)
-    // with their subject centred, so the crop trims background, not it.
-    const subj=view.img;
-    const scale=Math.max(W/subj.width, H/subj.height);
-    const dw=subj.width*scale, dh=subj.height*scale;
-    // crop centres on the subject's own focal point (default dead-centre);
-    // with the panel now locked to the same 16:9 as the source images this
-    // rarely has anything to trim, but it's here for anything off-ratio
-    const focal = FOCAL[o.id] || {x:0.5, y:0.5};
-    const dx = -(dw-W)*focal.x, dy = -(dh-H)*focal.y;
-    svx.drawImage(subj, dx, dy, dw, dh);
-    return;
-  }
-
-  const px=Math.max(2,Math.round(Math.min(W,H)/56));
-  const horizon=Math.round(H*0.58);
-  const tn=TONE[sel.d];
-
-  // sky, four bands lightening toward the horizon
-  [26,44,66,92].forEach((v,i)=>{ svx.fillStyle=g(v);
-    svx.fillRect(0, Math.round(horizon*i/4), W, Math.ceil(horizon/4)+1); });
-  // water
-  svx.fillStyle=g(38); svx.fillRect(0, horizon-Math.round(H*0.055), W, Math.round(H*0.055));
-  svx.fillStyle=g(64);
-  for(let y=horizon-Math.round(H*0.055); y<horizon; y+=3) svx.fillRect(0,y,W,1);
-  // ground
-  svx.fillStyle=g(226); svx.fillRect(0,horizon,W,H-horizon);
-  svx.fillStyle=g(178);
-  for(let y=horizon;y<H;y+=px*3) svx.fillRect(0,y,W,1);
-
-  // background massing
-  const n = d.id==='ne'?9 : d.id==='nw'?13 : d.id==='sw'?5 : 7;
-  for(let i=0;i<n;i++){
-    const r1=hsh(seed,i*3+1), r2=hsh(seed,i*3+2), r3=hsh(seed,i*3+3);
-    const bw=Math.round((d.id==='sw'?0.16:d.id==='nw'?0.07:0.11)*W*(0.6+r1*0.9));
-    const bh=Math.round(H*(d.id==='ne'?0.13+r2*0.10 : d.id==='se'?0.20+r2*0.22 : 0.10+r2*0.26));
-    const bx=Math.round(r3*(W-bw)), by=horizon-bh;
-    const face=[30,52,74][i%3];
-    svx.fillStyle=g(150); svx.fillRect(bx-1,by-1,bw+2,bh+2);     // edge highlight
-    svx.fillStyle=g(face); svx.fillRect(bx,by,bw,bh);
-    svx.fillStyle=g(Math.max(0,face-18));                        // shaded flank
-    svx.fillRect(bx+Math.round(bw*0.62),by,Math.round(bw*0.38),bh);
-    svx.fillStyle=g(214);
-    const cols=Math.max(1,Math.floor(bw/(px*4))), rows=Math.max(1,Math.floor(bh/(px*5)));
-    for(let cx=0;cx<cols;cx++) for(let cy=0;cy<rows;cy++){
-      if(hsh(seed+i,cx*31+cy)>0.62) continue;
-      svx.fillRect(bx+px+cx*px*4, by+px*2+cy*px*5, px*2, px*2);
-    }
-  }
-
-  const fw=Math.round(W*0.24), fh=Math.round(H*0.32);
-  const fx=Math.round(W/2-fw/2), fy=horizon-fh;
-  if(sel.kind==='span'){
-    const dy=horizon-Math.round(H*0.11), dh=Math.round(H*0.11);
-    svx.fillStyle=g(180); svx.fillRect(0,dy,W,px*3);
-    svx.fillStyle=g(60);  svx.fillRect(0,dy+px,W,px);
-    for(let x=px*4;x<W;x+=px*14){
-      svx.fillStyle=g(150); svx.fillRect(x-1,dy,px*2+2,dh);
-      svx.fillStyle=g(42);  svx.fillRect(x,dy,px*2,dh);
-    }
-  } else if(o.v.status==='Unbuilt' || o.v.status==='Open ground'){
-    svx.fillStyle=g(150);
-    svx.fillRect(fx-px*2,horizon-Math.round(H*0.10),fw+px*4,Math.round(H*0.10));
-    for(let i=0;i<34;i++){
-      const rx=fx+Math.round(hsh(seed,100+i)*fw), ry=horizon-Math.round(hsh(seed,200+i)*H*0.08);
-      svx.fillStyle=g([90,130,170][i%3]);
-      svx.fillRect(rx,ry,px*(1+Math.round(hsh(seed,300+i)*2)),px);
-    }
-  } else {
-    svx.fillStyle=g(206); svx.fillRect(fx-2,fy-2,fw+4,fh+4);
-    svx.fillStyle=g(26);  svx.fillRect(fx,fy,fw,fh);
-    svx.fillStyle=g(14);  svx.fillRect(fx+Math.round(fw*0.66),fy,Math.round(fw*0.34),fh);
-    svx.fillStyle=g(226);
-    for(let cy=0;cy<Math.floor(fh/(px*5));cy++)
-      for(let cx=0;cx<Math.floor(fw/(px*4));cx++){
-        if(hsh(seed+999,cx*17+cy)>0.55) continue;
-        svx.fillRect(fx+px+cx*px*4, fy+px*2+cy*px*5, px*2, px*3);
-      }
-  }
+  // centre cover-crop: scale so the image fully fills the panel on its
+  // shorter axis, then crop whatever overhangs on the longer one. Source
+  // images are drawn wide (320x180) with the subject centred, so the crop
+  // trims background, not the subject.
+  const subj=view.img;
+  const scale=Math.max(W/subj.width, H/subj.height);
+  const dw=subj.width*scale, dh=subj.height*scale;
+  // the crop centres on the subject's own focal point (default dead-centre)
+  const focal = FOCAL[o.id] || {x:0.5, y:0.5};
+  const dx = -(dw-W)*focal.x, dy = -(dh-H)*focal.y;
+  svx.drawImage(subj, dx, dy, dw, dh);
 }
 
 /* ---- portraits ----
@@ -422,15 +306,13 @@ setInterval(()=>{
 function renderInfo(){
   const el=document.getElementById('info');
   if(!sel){
-    el.innerHTML = '<div class="frag">'
-      + '&ldquo;&hellip;the five reclamations are to be administered as one instrument, '
-      + 'notwithstanding any subsequent dispute as to sovereignty.&rdquo;'
-      + '<div class="src">&mdash; concession clause, undated, contractor unknown</div></div>';
+    el.innerHTML = '<div class="frag">&ldquo;Our word for world is word.&rdquo;'
+      + '<div class="src">&mdash; traditional Lanting saying</div></div>';
     return;
   }
   const o=sel.o;
   const dbId = sel.kind==='district' ? o.dbId : o.id;
-  const text = DB.hist[dbId] || '';
+  const text = unread(DB.hist[dbId] || '', sel.kind==='district' ? 0 : unreadLevel);
   el.innerHTML='<h4>'+o.name+'</h4><div class="bd">'+text+'</div>';
 }
 
@@ -444,14 +326,14 @@ function say(){
   } else if(sel.kind==='district'){
     const d=sel.o;
     script=[
-      {s:'R', t:'Tuning on '+d.name+'. Charted as '+d.sub.toLowerCase()+'. '+POI.filter(p=>p.d===sel.d).length+' sites logged, ballast-paired with '+d.pair.toLowerCase()+'.'},
+      {s:'R', t:'Tuning on '+d.name+'. Charted as '+d.sub.toLowerCase()+'. '+POI.filter(p=>p.d===sel.d).length+' sites logged.'},
       {s:'L', t:'Pick one. What is said about a place and what is true about it are two different records, and you are going to want both.'}
     ];
   } else {
     const o=sel.o;
-    script = DB.dialogue[o.id] && DB.dialogue[o.id].length ? DB.dialogue[o.id] : [
-      {s:'R', t:'(no dialogue recorded for '+o.name+')'}
-    ];
+    script = DB.dialogue[o.id] && DB.dialogue[o.id].length
+      ? DB.dialogue[o.id].map(l=>({s:l.s, t:unread(l.t, unreadLevel)}))
+      : [ {s:'R', t:'(no dialogue recorded for '+o.name+')'} ];
   }
   step=0; showStep();
 }
@@ -485,11 +367,67 @@ function advance(){
 document.getElementById('talkbox').addEventListener('click',advance);
 
 /* ---- selection ---- */
+/* ---- the unreading ----
+   Once every marker has been clicked at least once, the map starts to
+   unspeak itself. Each further full pass over the markers is a round:
+   round 1 drops a (___) in among the words, round 2 replaces half the
+   words with (___), round 3 replaces all of them. Which words go is
+   random on every click. Applies to the SITE text and the dialogue.
+   (To test without clicking through everything, type  round = 2  in the
+   browser console.) */
+const BLANK='(___)';
+const MARKER_TOTAL = POI.length + BRIDGES.length;
+const seenFirst = new Set();      // markers clicked at least once (the first pass)
+let round = 0;                    // 0 = first pass; 1-3 = unreading rounds
+let roundSeen = new Set();        // markers clicked during the current round
+let unreadLevel = 0;              // level applied to whatever is on screen now
+
+function noteVisit(key){
+  unreadLevel = round;            // this click shows the current round
+  if(round===0){
+    seenFirst.add(key);
+    if(seenFirst.size>=MARKER_TOTAL){ round=1; roundSeen=new Set(); }
+  } else {
+    roundSeen.add(key);
+    if(roundSeen.size>=MARKER_TOTAL && round<3){ round++; roundSeen=new Set(); }
+  }
+}
+
+function shuffled(a){
+  a=a.slice();
+  for(let k=a.length-1;k>0;k--){ const j=Math.floor(Math.random()*(k+1)); [a[k],a[j]]=[a[j],a[k]]; }
+  return a;
+}
+
+function unread(text, level){
+  if(!level || !text) return text;
+  const parts=text.split(/(\s+)/);               // words and whitespace, line breaks kept
+  const words=[];
+  parts.forEach((t,i)=>{ if(t && !/^\s+$/.test(t) && /[\p{L}\p{N}]/u.test(t)) words.push(i); });
+  if(!words.length) return text;
+  const blank=(tok)=>{                            // swap the word, keep its punctuation
+    const m=tok.match(/^([^\p{L}\p{N}]*)(.*?)([^\p{L}\p{N}]*)$/u);
+    return m[1]+BLANK+m[3];
+  };
+  if(level>=3){
+    words.forEach(i=>{ parts[i]=blank(parts[i]); });
+  } else if(level===2){
+    shuffled(words).slice(0,Math.floor(words.length/2)).forEach(i=>{ parts[i]=blank(parts[i]); });
+  } else {
+    const gaps=words.slice(0,-1);                 // a gap follows every word but the last
+    const n=Math.max(1,Math.round(gaps.length/4));
+    shuffled(gaps).slice(0,n).forEach(i=>{ parts[i]=parts[i]+' '+BLANK; });
+  }
+  return parts.join('');
+}
+
 function pick(key){
   if(sel && sel.key===key) sel=null;
   else if(key[0]==='p'){ const p=POI[+key.slice(1)]; sel={key,kind:'site',d:p.d,o:p}; }
   else if(key[0]==='b'){ const b=BRIDGES[+key.slice(1)]; sel={key,kind:'span',d:b.to,o:b}; }
   else { const k=+key.slice(1); sel={key,kind:'district',d:k,o:DISTRICTS[k]}; }
+  unreadLevel=0;
+  if(sel && (sel.kind==='site'||sel.kind==='span')) noteVisit(sel.key);
   paintSheet(); draw(); drawSiteView(); buildMenus(); renderInfo(); say();
 }
 canvas.addEventListener('click',e=>{
@@ -502,9 +440,8 @@ canvas.addEventListener('click',e=>{
   if(hit){ pick(hit); return; }
   const gx=Math.floor(mx), gy=Math.floor(my);
   if(gx<0||gy<0||gx>=N||gy>=N) return;
-  const i=gy*N+gx;
-  if(cells[i]===SEA||owner[i]<0) return;
-  pick('d'+owner[i]);
+  const k=islandAt(gx,gy);
+  if(k>=0) pick('d'+k);
 });
 
 function buildMenus(){
@@ -526,10 +463,4 @@ window.addEventListener('keydown',e=>{
   const k=e.key.toLowerCase();
   if(k===' '){ e.preventDefault(); advance(); return; }
   if(k==='escape'){ clearSel(); return; }
-  const di=DISTRICTS.findIndex(d=>d.hk===k);
-  if(di>=0){ pick('d'+di); return; }
-  if(sel && '1234'.includes(k)){
-    const i=POI.findIndex(p=>p.d===sel.d && p.n===k);
-    if(i>=0) pick('p'+i);
-  }
 });

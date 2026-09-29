@@ -12,8 +12,7 @@
     "site-ne-3": "One of a matched pair. Its readings are filed and have not been published.",
     "site-ne-4": "The point at which the island stops appearing on the civic register. No structure marks it.",
     "site-nw-1": "Its name is the place between\na dark road for the Remembered\na drowned ruin that rises with the tide.\nTwo brothers raised four islands\nA fifth one now held up, awoken\n\nThe marshland known to locals as the Low Spaces is built upon Lanting-era megaliths, the burial sites of the islands' mythical founders, a pair of divine snake twins who raised the islands from the sea. Rumoured to be haunted, its impenetrable mangrove serves smugglers as a route: books come in and (___) is carried out.",
-    "site-nw-2": "Determinations made here are executed on Sempadan Jaya. The two offices have never shared a file.",
-    "site-nw-3": "Left deliberately unbuilt. The emptiness appears in the original specification, not as an oversight.",
+    "site-nw-3": "A market grown in the queue for a door\none wall of words that may be said, each meaning only itself\none wall of brackets where the banned ones were\nthe failed wait here until the waiting is an address\nthe ones who pass are not seen again\n\nPortside grew in the yard outside the Examination Halls, where candidates who fail the exam wait to sit it again. Kept empty by design and never cleared, since the Interzone's customs exemption leaves no authority able to clear it, it is now a market in dozens of languages, selling coached scripts, forged certificates and interpreters, and taking in books from outside. Two walls face the lane. One lists the words the Republic allows, each set equal to itself; the other holds only empty brackets, since a banned word is never written down.",
     "site-sw-1": "Rebuilt in full after the rupture. No structural record from before that date survives on file.",
     "site-sw-2": "Private frontage, reinforced after the rupture. Sits above ground shared with Sunyi.",
     "site-sw-3": "Maintained by custom rather than ordinance. No engineering rationale is recorded for the practice.",
@@ -225,40 +224,34 @@
         "t": "Rawi?"
       }
     ],
-    "site-nw-2": [
-      {
-        "s": "L",
-        "t": "Everything is decided here by people who will never see where you are sent."
-      },
-      {
-        "s": "R",
-        "t": "Determinations drafted here, executed on Sempadan Jaya. Neither office visits the other."
-      },
-      {
-        "s": "L",
-        "t": "They are not unkind. They are just elsewhere."
-      },
-      {
-        "s": "R",
-        "t": "Two authorities, no shared jurisdiction, and it functions perfectly."
-      }
-    ],
     "site-nw-3": [
       {
-        "s": "L",
-        "t": "Open ground, no shade, and a line that moves at the pace of the sea."
-      },
-      {
         "s": "R",
-        "t": "Holding yard, deliberately unbuilt so occupancy reads from above at all hours."
+        "t": "The left wall is just blanks. How does anyone know what's banned?"
       },
       {
         "s": "L",
-        "t": "Bring water. Nobody tells you that."
+        "t": "Not blank. Redacted."
       },
       {
         "s": "R",
-        "t": "The emptiness is the instrument. It was designed empty."
+        "t": "What's the difference?"
+      },
+      {
+        "s": "L",
+        "t": "Some time ago, something happened that nobody can agree on. We call it the Redaction. It took away ideas, words, thoughts. The Republic tries to index what is missing and build new words for them."
+      },
+      {
+        "s": "R",
+        "t": "So people allowed in can only enter if they speak the standardized language?"
+      },
+      {
+        "s": "L",
+        "t": "Yes. But what they don't know is that we can still speak (___). It (___) just (___) stopped (___) being (___) written (___) down."
+      },
+      {
+        "s": "R",
+        "t": "Wait. Something's wrong. Rawi, did you do something?"
       }
     ],
     "site-sw-1": [
