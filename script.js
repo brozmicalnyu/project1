@@ -15,8 +15,8 @@ const DISTRICTS=[
   { id:'core', dbId:'island-core', name:'REMEMBRANCE', sub:'INGATAN' },
   { id:'ne', dbId:'island-ne', name:'SILENCE', sub:'UNNAMED ON CHART' },
   { id:'nw', dbId:'island-nw', name:'THE INTERZONE', sub:'COMPANY ROADS' },
-  { id:'sw', dbId:'island-sw', name:'HOMELAND', sub:'REPUBLIC NAME' },
-  { id:'se', dbId:'island-se', name:'SEMPADAN JAYA', sub:'CONTESTED NAME' }
+  { id:'sw', dbId:'island-sw', name:'FOREVER', sub:'REPUBLIC NAME' },
+  { id:'se', dbId:'island-se', name:'TESTAMENT', sub:'CONTESTED NAME' }
 ];
 
 const POI=[
@@ -29,13 +29,11 @@ const POI=[
   {d:2,n:'1',id:'site-nw-1',x:76,y:247,name:'THE LOW SPACES'},
   {d:2,n:'2',id:'site-nw-3',x:214,y:352,name:'PORTSIDE'},
 
-  {d:3,n:'1',id:'site-sw-1',x:200,y:912,name:'LEVELLED QUARTER'},
+  {d:3,n:'1',id:'site-sw-1',x:200,y:912,name:'HOMELAND'},
   {d:3,n:'2',id:'site-sw-2',x:312,y:972,name:'THE GARDENS'},
 
-  {d:4,n:'1',id:'site-se-1',x:952,y:912,name:'OVERSIGHT BUREAU'},
-  {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE SEALED ARCHIVE'},
-  {d:4,n:'3',id:'site-se-3',x:960,y:1056,name:'PERMIT HALL'},
-  {d:4,n:'4',id:'site-se-4',x:1084,y:1046,name:'TILT STATION SE'}
+  {d:4,n:'1',id:'site-se-1',x:952,y:912,name:'THE REGISTRY'},
+  {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE TESTIMONIES',nomad:true}
 ];
 
 const BRIDGES=[
@@ -90,6 +88,42 @@ function islandAt(x,y){                            // which island is this map p
     if(probeX.getImageData(0,0,1,1).data[3]>0) return k;
   }
   return -1;
+}
+
+/* ---- nomadic sites ----
+   A POI with nomad:true has no fixed place. Each time the viewer looks away
+   from it (selects something else, deselects it, or presses escape) it moves
+   to a new spot on its own island: inland, clear of other markers, and never
+   where it has already been. */
+const landCache={};
+function landPoints(k){                            // inland sample points on island k, from its mask
+  if(landCache[k]) return landCache[k];
+  const m=MASKS[k]; if(!m) return (landCache[k]=[]);
+  const c=document.createElement('canvas'); c.width=m.width; c.height=m.height;
+  const cx=c.getContext('2d'); cx.drawImage(m,0,0);
+  const a=cx.getImageData(0,0,c.width,c.height).data, W=c.width, H=c.height;
+  const on=(x,y)=> x>=0&&y>=0&&x<W&&y<H && a[(y*W+x)*4+3]>0;
+  const pts=[], STEP=6, INSET=18;                  // INSET keeps it off the coastline
+  for(let y=0;y<H;y+=STEP) for(let x=0;x<W;x+=STEP)
+    if(on(x,y)&&on(x-INSET,y)&&on(x+INSET,y)&&on(x,y-INSET)&&on(x,y+INSET)) pts.push([x,y]);
+  return (landCache[k]=pts);
+}
+function relocate(p){
+  const pts=landPoints(p.d); if(!pts.length) return;
+  p.seen=p.seen||[[p.x,p.y]];
+  const others=POI.filter(q=>q!==p).concat(BRIDGES);
+  const clear=(x,y,far)=> others.every(q=>Math.hypot(q.x-x,q.y-y)>=45)
+                       && p.seen.every(([sx,sy])=>Math.hypot(sx-x,sy-y)>=far);
+  let spot=null;
+  for(const far of [60,30,12]){                    // relax only if the island runs out of room
+    const ok=pts.filter(([x,y])=>clear(x,y,far));
+    if(ok.length){ spot=ok[Math.floor(Math.random()*ok.length)]; break; }
+  }
+  if(!spot) return;
+  p.x=spot[0]; p.y=spot[1]; p.seen.push(spot);
+}
+function lookAway(prev){                           // call with the selection being left behind
+  if(prev && prev.kind==='site' && prev.o.nomad && (!sel || sel.o!==prev.o)) relocate(prev.o);
 }
 
 const dbLoad = loadDB();
@@ -193,14 +227,17 @@ const FOCAL={};  // e.g. FOCAL['site-re-1']={x:0.49,y:0.5}
 const VIEW_IMAGES={};
 function viewSrc(id){ return 'views/'+id+'.png'; }
 
+// the view image the current selection wants: islands by dbId, sites by id
+function viewKey(){ return !sel ? null : sel.kind==='district' ? sel.o.dbId : sel.o.id; }
+
 function ensureView(id){
   let rec=VIEW_IMAGES[id];
   if(rec) return rec;
   rec={status:'pending', img:null};
   VIEW_IMAGES[id]=rec;
   const img=new Image();
-  img.onload =()=>{ rec.status='ok';    rec.img=img; if(sel && sel.o && sel.o.id===id) drawSiteView(); };
-  img.onerror=()=>{ rec.status='error'; if(sel && sel.o && sel.o.id===id) drawSiteView(); };
+  img.onload =()=>{ rec.status='ok';    rec.img=img; if(viewKey()===id) drawSiteView(); };
+  img.onerror=()=>{ rec.status='error'; if(viewKey()===id) drawSiteView(); };
   img.src=viewSrc(id);
   return rec;
 }
@@ -222,10 +259,10 @@ function drawSiteView(){
   };
 
   if(!sel){ card('NO SITE SELECTED'); return; }
-  if(sel.kind==='district'){ card(sel.o.name); return; }
-
+  // islands use views/island-<id>.png (their dbId), sites use views/<id>.png;
+  // either falls back to the name card when there's no file
   const o=sel.o;
-  const view=ensureView(o.id);
+  const view=ensureView(viewKey());
   if(view.status==='pending') return;                // stay dark until the file arrives, so a site with an image never flashes the card
   if(view.status!=='ok'){ card(o.name); return; }    // no image for this site yet
 
@@ -333,7 +370,7 @@ function say(){
   } else if(sel.kind==='district'){
     const d=sel.o;
     script=[
-      {s:'R', t:'Tuning on '+d.name+'. Charted as '+d.sub.toLowerCase()+'. '+POI.filter(p=>p.d===sel.d).length+' sites logged.'},
+      {s:'R', t:'Tuning on '+d.name+'. '+POI.filter(p=>p.d===sel.d).length+' sites logged.'},
       {s:'L', t:'Pick one. What is said about a place and what is true about it are two different records, and you are going to want both.'}
     ];
   } else {
@@ -429,10 +466,12 @@ function unread(text, level){
 }
 
 function pick(key){
+  const prev=sel;
   if(sel && sel.key===key) sel=null;
   else if(key[0]==='p'){ const p=POI[+key.slice(1)]; sel={key,kind:'site',d:p.d,o:p}; }
   else if(key[0]==='b'){ const b=BRIDGES[+key.slice(1)]; sel={key,kind:'span',d:b.to,o:b}; }
   else { const k=+key.slice(1); sel={key,kind:'district',d:k,o:DISTRICTS[k]}; }
+  lookAway(prev);
   unreadLevel=0;
   if(sel && (sel.kind==='site'||sel.kind==='span')) noteVisit(sel.key);
   paintSheet(); draw(); drawSiteView(); buildMenus(); renderInfo(); say();
@@ -462,7 +501,7 @@ function buildMenus(){
   }
 }
 function clearSel(){
-  sel=null; paintSheet(); draw(); drawSiteView(); buildMenus(); renderInfo(); say();
+  const prev=sel; sel=null; lookAway(prev); paintSheet(); draw(); drawSiteView(); buildMenus(); renderInfo(); say();
 }
 
 
