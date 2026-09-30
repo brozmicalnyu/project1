@@ -301,7 +301,10 @@ function shuffled(a){ // copy, shuffled
 }
 
 function unread(text, level){ // blank some words; spaces, line breaks and punctuation stay
-  return text.replace(/[\p{L}\p{N}']+/gu, w => Math.random() < BLANK_CHANCE[level] ? BLANK : w);
+  return text.replace(/\w+/g, w => {
+    if(w==='___') return w; // the inside of an existing (___): leave it
+    return Math.random() < BLANK_CHANCE[level] ? BLANK : w;
+  });
 }
 
 // ---- selection ----
