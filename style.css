@@ -1,5 +1,5 @@
 :root{
-  /* greys only, no hue anywhere */
+  /* greyscale */
   --g0:#000000; --g1:#1c1c1c; --g2:#3a3a3a; --g3:#6a6a6a;
   --g4:#9a9a9a; --g5:#c8c8c8; --g6:#ffffff;
   --blk:#000000; --wht:#ffffff;

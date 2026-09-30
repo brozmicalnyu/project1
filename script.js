@@ -7,15 +7,9 @@ const SPEAKERS={ // L = left portrait, R = right portrait
   R:{ name:'ADLER', role:'forensic architect,<br><span>off-island</span>' }
 };
 
-const DISTRICTS=[ // the five islands; dbId keys their text and their mask/view files
-  { id:'core', dbId:'island-core', name:'REMEMBRANCE', sub:'INGATAN' },
-  { id:'ne', dbId:'island-ne', name:'SILENCE', sub:'UNNAMED ON CHART' },
-  { id:'nw', dbId:'island-nw', name:'THE INTERZONE', sub:'COMPANY ROADS' },
-  { id:'sw', dbId:'island-sw', name:'FOREVER', sub:'REPUBLIC NAME' },
-  { id:'se', dbId:'island-se', name:'TESTAMENT', sub:'CONTESTED NAME' }
-];
+const ISLANDS=['REMEMBRANCE','SILENCE','THE INTERZONE','FOREVER','TESTAMENT']; // named in the hint strip
 
-const POI=[ // sites: d = island index, n = marker label, x/y = position on the chart
+const POI=[ // sites: d = index into ISLANDS, n = marker label, x/y = position on the chart
   {d:0,n:'1',id:'site-re-1',x:620,y:633,name:'THE VOID'},
   {d:0,n:'2',id:'site-re-2',x:604,y:522,name:'THE WATCHTOWER'},
 
@@ -49,20 +43,7 @@ const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
 const frame=document.getElementById('mapframe');
 const sv=document.getElementById('sv'), svx=sv.getContext('2d');
 let N=0; // map size, set once the chart loads
-let sel=null; // what's selected: an island or a site
-
-// ---- islands ----
-// each island is a circle on the chart: click inside it to select that island
-const REGIONS=[ // same order as DISTRICTS; x/y = centre, r = radius, in chart pixels
-  {x:620, y:633, r:215}, // remembrance
-  {x:1000,y:281, r:215}, // silence
-  {x:252, y:279, r:215}, // the interzone
-  {x:265, y:983, r:215}, // forever
-  {x:995, y:987, r:215}  // testament
-];
-function islandAt(x,y){ // which island's circle holds this point, -1 for sea
-  return REGIONS.findIndex(c=>Math.hypot(c.x-x,c.y-y)<=c.r);
-}
+let sel=null; // the selected site, or null
 
 // ---- nomadic sites ----
 // the testimonies have no address: look away and they're somewhere new
@@ -75,7 +56,7 @@ function relocate(p){ // move a nomad to a spot it hasn't used, until all are us
   [p.x,p.y]=nomadBag.pop();
 }
 function lookAway(prev){ // moves a nomad once it stops being looked at
-  if(prev && prev.kind==='site' && prev.o.nomad && (!sel || sel.o!==prev.o)) relocate(prev.o);
+  if(prev && prev.nomad && sel!==prev) relocate(prev);
 }
 
 // ---- start-up ----
@@ -92,8 +73,6 @@ img.src='armature.png';
 
 // ---- chart ----
 // the plan is shown exactly as drawn
-const BAYER=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
-function dith(x,y,d){ return BAYER[y&3][x&3] < d; } // ordered dither: true for d of every 16 pixels
 
 let fitS=1, fitX=0, fitY=0; // scale and offset of the chart inside its frame
 function draw(){
@@ -125,7 +104,7 @@ function drawMarkers(){ // redrawn every frame so unselected markers can blink
     ctx.fillText(label, 0, S*0.04);
     ctx.restore();
   };
-  POI.forEach((p,i)=> one(p.x,p.y,p.n, !!(sel&&sel.key==='p'+i)) );
+  POI.forEach(p=> one(p.x,p.y,p.n, sel===p) );
 }
 
 (function pulseLoop(){ // keeps the markers blinking
@@ -143,12 +122,10 @@ function resize(){ // match canvases to their frames, sharp on retina
 window.addEventListener('resize',resize);
 
 // ---- view panel ----
-// views/<id>.png for sites, views/island-<id>.png for islands; no file = name card
+// views/<id>.png for each site; no file = name card
 const FOCAL={}; // optional crop centre per image, e.g. FOCAL['site-re-1']={x:0.49,y:0.5}
 const VIEW_IMAGES={}; // loaded images, cached by id
 function viewSrc(id){ return 'views/'+id+'.png'; }
-
-function viewKey(){ return !sel ? null : sel.kind==='district' ? sel.o.dbId : sel.o.id; } // which image the selection wants
 
 function ensureView(id){ // load once; redraw when it arrives if still wanted
   let rec=VIEW_IMAGES[id];
@@ -156,8 +133,8 @@ function ensureView(id){ // load once; redraw when it arrives if still wanted
   rec={status:'pending', img:null};
   VIEW_IMAGES[id]=rec;
   const img=new Image();
-  img.onload =()=>{ rec.status='ok';    rec.img=img; if(viewKey()===id) drawSiteView(); };
-  img.onerror=()=>{ rec.status='error'; if(viewKey()===id) drawSiteView(); };
+  img.onload =()=>{ rec.status='ok';    rec.img=img; if(sel && sel.id===id) drawSiteView(); };
+  img.onerror=()=>{ rec.status='error'; if(sel && sel.id===id) drawSiteView(); };
   img.src=viewSrc(id);
   return rec;
 }
@@ -167,25 +144,22 @@ function drawSiteView(){
   svx.imageSmoothingEnabled=false;
   svx.fillStyle='rgb(12,12,12)'; svx.fillRect(0,0,W,H);
 
-  const card=(label)=>{ // dithered stand-in with a caption
-    svx.fillStyle='rgb(56,56,56)';
-    for(let y=0;y<H;y++) for(let x=0;x<W;x++)
-      if(dith(x,y,3)) svx.fillRect(x,y,1,1);
+  const card=(label)=>{ // plain stand-in with a caption
+    svx.fillStyle='rgb(30,30,30)'; svx.fillRect(0,0,W,H);
     svx.fillStyle='#000'; svx.fillRect(0,(H>>1)-11,W,22);
     svx.fillStyle='rgb(200,200,200)'; svx.font='8px DotGothic16, monospace'; svx.textAlign='center';
     svx.fillText(label, W/2, (H>>1)+3);
   };
 
   if(!sel){ card('NO SITE SELECTED'); return; }
-  const o=sel.o;
-  const view=ensureView(viewKey());
+  const view=ensureView(sel.id);
   if(view.status==='pending') return; // stay dark while loading, so the card never flashes
-  if(view.status!=='ok'){ card(o.name); return; } // no image yet
+  if(view.status!=='ok'){ card(sel.name); return; } // no image yet
 
   const subj=view.img;
   const scale=Math.max(W/subj.width, H/subj.height); // cover-crop: fill the panel, trim the overhang
   const dw=subj.width*scale, dh=subj.height*scale;
-  const focal = FOCAL[o.id] || {x:0.5, y:0.5}; // default: crop from the centre
+  const focal = FOCAL[sel.id] || {x:0.5, y:0.5}; // default: crop from the centre
   const dx = -(dw-W)*focal.x, dy = -(dh-H)*focal.y;
   svx.drawImage(subj, dx, dy, dw, dh);
 }
@@ -250,10 +224,8 @@ function renderInfo(){
       + '<div class="src">&mdash; traditional Lanting saying</div></div>';
     return;
   }
-  const o=sel.o;
-  const dbId = sel.kind==='district' ? o.dbId : o.id;
-  const text = unread(DB.hist[dbId] || '', sel.kind==='district' ? 0 : unreadLevel); // island text never unreads
-  el.innerHTML='<h4>'+o.name+'</h4>'+siteBody(text);
+  const text = unread(DB.hist[sel.id] || '', unreadLevel);
+  el.innerHTML='<h4>'+sel.name+'</h4>'+siteBody(text);
 }
 
 function siteBody(text){ // verse, blank line, paragraph -> one block per verse line
@@ -270,17 +242,11 @@ function say(){ // pick the lines for whatever is selected
     script = (DB.intro && DB.intro.length) ? DB.intro : [
       {s:'R', t:'(city-database.json not loaded)'}
     ];
-  } else if(sel.kind==='district'){ // islands share one generated exchange
-    const d=sel.o;
-    script=[
-      {s:'R', t:'Tuning on '+d.name+'. '+POI.filter(p=>p.d===sel.d).length+' sites logged.'},
-      {s:'L', t:'Pick one. What is said about a place and what is true about it are two different records, and you are going to want both.'}
-    ];
   } else {
-    const o=sel.o;
-    script = DB.dialogue[o.id] && DB.dialogue[o.id].length
-      ? DB.dialogue[o.id].map(l=>({s:l.s, t:unread(l.t, unreadLevel)}))
-      : [ {s:'R', t:'(no dialogue recorded for '+o.name+')'} ];
+    const lines=DB.dialogue[sel.id];
+    script = lines && lines.length
+      ? lines.map(l=>({s:l.s, t:unread(l.t, unreadLevel)}))
+      : [ {s:'R', t:'(no dialogue recorded for '+sel.name+')'} ];
   }
   step=0; showStep();
 }
@@ -314,25 +280,18 @@ function advance(){ // click or space: finish the line, or go to the next
 document.getElementById('talkbox').addEventListener('click',advance);
 
 // ---- the unreading ----
-// after a full pass over every marker, each new pass blanks more words:
-// round 1 adds a (___), round 2 blanks half, round 3 blanks all
+// after a full pass over every site, each new pass blanks more words
 // to test, type  round = 2  in the browser console
 const BLANK='(___)';
-const MARKER_TOTAL = POI.length; // every site counts toward a full pass
-const seenFirst = new Set(); // markers clicked in the first pass
-let round = 0; // 0 = first pass, 1-3 = unreading rounds
-let roundSeen = new Set(); // markers clicked this round
-let unreadLevel = 0; // level shown on screen now
+const BLANK_CHANCE=[0, 0.15, 0.5, 1]; // share of words blanked in rounds 0-3
+let round=0; // 0 = first pass, 1-3 = unreading rounds
+let seen=new Set(); // sites clicked this round
+let unreadLevel=0; // round shown on screen now
 
-function noteVisit(key){ // count a click toward the next round
-  unreadLevel = round; // this click shows the current round
-  if(round===0){
-    seenFirst.add(key);
-    if(seenFirst.size>=MARKER_TOTAL){ round=1; roundSeen=new Set(); }
-  } else {
-    roundSeen.add(key);
-    if(roundSeen.size>=MARKER_TOTAL && round<3){ round++; roundSeen=new Set(); }
-  }
+function noteVisit(id){ // a full pass over every site moves to the next round
+  unreadLevel=round;
+  seen.add(id);
+  if(seen.size===POI.length && round<3){ round++; seen.clear(); }
 }
 
 function shuffled(a){ // copy, shuffled
@@ -341,56 +300,33 @@ function shuffled(a){ // copy, shuffled
   return a;
 }
 
-function unread(text, level){ // blank words at this level, keep spacing and punctuation
-  if(!level || !text) return text;
-  const parts=text.split(/(\s+)/); // words and spaces, line breaks kept
-  const words=[];
-  parts.forEach((t,i)=>{ if(t && !/^\s+$/.test(t) && /[\p{L}\p{N}]/u.test(t)) words.push(i); }); // a (___) already there isn't a word
-  if(!words.length) return text;
-  const blank=(tok)=>{ // swap the word, keep its punctuation
-    const m=tok.match(/^([^\p{L}\p{N}]*)(.*?)([^\p{L}\p{N}]*)$/u);
-    return m[1]+BLANK+m[3];
-  };
-  if(level>=3){
-    words.forEach(i=>{ parts[i]=blank(parts[i]); });
-  } else if(level===2){
-    shuffled(words).slice(0,Math.floor(words.length/2)).forEach(i=>{ parts[i]=blank(parts[i]); });
-  } else {
-    const gaps=words.slice(0,-1); // a (___) can follow any word but the last
-    const n=Math.max(1,Math.round(gaps.length/4));
-    shuffled(gaps).slice(0,n).forEach(i=>{ parts[i]=parts[i]+' '+BLANK; });
-  }
-  return parts.join('');
+function unread(text, level){ // blank some words; spaces, line breaks and punctuation stay
+  return text.replace(/[\p{L}\p{N}']+/gu, w => Math.random() < BLANK_CHANCE[level] ? BLANK : w);
 }
 
 // ---- selection ----
-function pick(key){ // select a site (p) or island (d); same key again deselects
+function pick(p){ // select a site; clicking the selected one again deselects it
   const prev=sel;
-  if(sel && sel.key===key) sel=null;
-  else if(key[0]==='p'){ const p=POI[+key.slice(1)]; sel={key,kind:'site',d:p.d,o:p}; }
-  else { const k=+key.slice(1); sel={key,kind:'district',d:k,o:DISTRICTS[k]}; }
+  sel = (sel===p) ? null : p;
   lookAway(prev);
-  unreadLevel=0; // islands always read clean
-  if(sel && sel.kind==='site') noteVisit(sel.key);
+  unreadLevel=0;
+  if(sel) noteVisit(sel.id);
   draw(); drawSiteView(); updateHint(); renderInfo(); say();
 }
-canvas.addEventListener('click',e=>{ // markers first, then whichever island was clicked
+canvas.addEventListener('click',e=>{ // select the nearest marker to the click, if any
   const r=canvas.getBoundingClientRect();
   const dpr=canvas.width/r.width;
   const mx=((e.clientX-r.left)*dpr-fitX)/fitS, my=((e.clientY-r.top)*dpr-fitY)/fitS;
   let hit=null, bd=34; // click radius around a marker, in chart pixels
-  POI.forEach((p,i)=>{ const d=Math.hypot(p.x-mx,p.y-my); if(d<bd){bd=d;hit='p'+i;} });
-  if(hit){ pick(hit); return; }
-  const k=islandAt(mx,my);
-  if(k>=0) pick('d'+k);
+  POI.forEach(p=>{ const d=Math.hypot(p.x-mx,p.y-my); if(d<bd){bd=d;hit=p;} });
+  if(hit) pick(hit);
 });
 
 function updateHint(){ // the hint strip in the chart's corner
   const hint=document.getElementById('maphint');
   if(hint){
-    hint.textContent = !sel ? 'SELECT AN ISLAND OR CLICK A MARKER'
-      : sel.kind==='district' ? sel.o.name + '  \u2014  SELECT A SITE' // no highlight, so the hint names the island
-      : sel.o.name + '  \u2014  ' + DISTRICTS[sel.d].name;
+    hint.textContent = !sel ? 'CLICK A MARKER'
+      : sel.name + '  \u2014  ' + ISLANDS[sel.d];
   }
 }
 function clearSel(){ // escape: select nothing
