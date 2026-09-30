@@ -73,7 +73,8 @@ body{
 .talkrow{ flex:1; display:flex; gap:9px; padding:10px; min-height:0; align-items:stretch; }
 .port{ width:104px; flex:none; display:flex; flex-direction:column; gap:5px; }
 .port canvas{ /* portraits dim until their speaker talks */ width:104px; height:104px; image-rendering:pixelated; background:var(--g0); border:2px solid var(--g2); opacity:.45; }
-.port .nm{ font-size:7px; color:var(--g3); line-height:1.5; }
+.port .nm{ font-size:9px; color:var(--g3); line-height:1.5; } /* name and role under each portrait */
+.port .nm b{ font-size:11px; } /* the name itself, a step bigger than the role */
 .port .nm span{ color:var(--g3); }
 .port.on canvas{ /* the one speaking */ opacity:1; border-color:var(--g6); }
 .port.on .nm{ color:var(--g6); }
