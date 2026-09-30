@@ -15,7 +15,7 @@ const DISTRICTS=[
   { id:'core', dbId:'island-core', name:'REMEMBRANCE', sub:'INGATAN' },
   { id:'ne', dbId:'island-ne', name:'SILENCE', sub:'UNNAMED ON CHART' },
   { id:'nw', dbId:'island-nw', name:'THE INTERZONE', sub:'COMPANY ROADS' },
-  { id:'sw', dbId:'island-sw', name:'CONCORD', sub:'PROTECTORATE NAME' },
+  { id:'sw', dbId:'island-sw', name:'HOMELAND', sub:'REPUBLIC NAME' },
   { id:'se', dbId:'island-se', name:'SEMPADAN JAYA', sub:'CONTESTED NAME' }
 ];
 
@@ -30,8 +30,7 @@ const POI=[
   {d:2,n:'2',id:'site-nw-3',x:214,y:352,name:'PORTSIDE'},
 
   {d:3,n:'1',id:'site-sw-1',x:200,y:912,name:'LEVELLED QUARTER'},
-  {d:3,n:'2',id:'site-sw-2',x:330,y:934,name:'SEAWALL TERRACES'},
-  {d:3,n:'3',id:'site-sw-3',x:214,y:1056,name:'COUNTERWEIGHT GARDENS'},
+  {d:3,n:'2',id:'site-sw-2',x:312,y:972,name:'THE GARDENS'},
 
   {d:4,n:'1',id:'site-se-1',x:952,y:912,name:'OVERSIGHT BUREAU'},
   {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE SEALED ARCHIVE'},

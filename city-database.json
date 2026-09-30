@@ -3,16 +3,14 @@
     "island-core": "Named by the Eastern Shoals Company for those lost on the passage. The name was never revised by any later administration.",
     "island-ne": "Absent from the current civic register. Older charts give a name the present administration does not use.",
     "island-nw": "Retains a customs exemption dating to the Company concession. The exemption was never formally closed.",
-    "island-sw": "Named under Protectorate survey. The name has stood without amendment since.",
+    "island-sw": "Renamed by the Republic for the residents it expects. The earlier Protectorate name, Concord, is no longer in administrative use.",
     "island-se": "The name in current administrative use. An earlier name remains in circulation on charts from the other claimant.",
     "site-re-1": "Four fingers made from ruin reaching into the sky\na skeletal hand, victim of unknown conflict\na site for a communion ungrasped\na gesture from a time unremembered\na fifth finger excised.\n\nThe central landmark of Remembrance, the Void is a sacred, taboo site for both the Republic and the Remembered. Each believes it to be the location of a key battle during the war of the Redaction. Neither can recall its significance, nor what structures stood there before.",
     "site-re-2": "The Watchtower stands as a pointed finger\nBeckoning towards distant shores or\nOstracizing those who linger\nA cypher once stood here, now unmade and unread.\nOne hand waves ships in. The same hand waves them off.\n\nThis lone watchtower is Remembrance's oldest structure, raised soon after the Company's charting to watch the channel for incoming vessels. Built over a now-lost Lanting monument, the tower now maintains two crews, each operating different shifts using different stairways for entry. The Republic crews control immigration, and observe and welcome new immigrants from the Interzone, while a Remembered team covertly controls expulsion, marking those to be driven out.",
-    "site-ne-2": "Built to a fixed plan under Protectorate ordinance. The plan has not been revised since.",
+    "site-ne-2": "Across Silence, surrounding the Eye, hushed buildings lie squat. Remembered prisoners live within these cells, those who refuse to listen to the new Language. They are counted each morning and left in the dark each night, when a few windows are lit in undeciphered patterns, changing nightly and never repeated.",
     "site-nw-1": "Its name is the place between\na dark road for the Remembered\na drowned ruin that rises with the tide.\nTwo brothers raised four islands\nA fifth one now held up, awoken\n\nThe marshland known to locals as the Low Spaces is built upon Lanting-era megaliths, the burial sites of the islands' mythical founders, a pair of divine snake twins who raised the islands from the sea. Rumoured to be haunted, its impenetrable mangrove serves smugglers as a route: books come in and (___) is carried out.",
     "site-nw-3": "A market grown in the queue for a door\none wall of words that may be said, each meaning only itself\none wall of brackets where the banned ones were\nthe failed wait here until the waiting is an address\nthe ones who pass are not seen again\n\nPortside grew in the yard outside the Examination Halls, where candidates who fail the exam wait to sit it again. Kept empty by design and never cleared, since the Interzone's customs exemption leaves no authority able to clear it, it is now a market in dozens of languages, selling coached scripts, forged certificates and interpreters, and taking in books from outside. Two walls face the lane. One lists the words the Republic allows, each set equal to itself; the other holds only empty brackets, since a banned word is never written down.",
-    "site-sw-1": "Rebuilt in full after the rupture. No structural record from before that date survives on file.",
-    "site-sw-2": "Private frontage, reinforced after the rupture. Sits above ground shared with Silence.",
-    "site-sw-3": "Maintained by custom rather than ordinance. No engineering rationale is recorded for the practice.",
+    "site-sw-1": "Empty houses await their families\ntables set, beds made\nin the lit windows, faces\nperfectly spoken, perfectly alike\nwhen they settle, nothing more will be said\n\nHomeland was built to house Republic families who never arrived. Children who slip in after dark tell of families already living there. Every child describes them the same way: faces like their own, speaking a language familiar but unrecognised. Adults driving past see only lit windows and empty show homes.",
     "site-se-1": "Established to monitor settlement across the archipelago. Its findings are not a matter of public record.",
     "site-se-2": "Contractor records, unclaimed after dissolution. Sealed by default, not by order.",
     "site-se-3": "Issues consent for construction. Heavy load applications are subject to an unwritten review.",
@@ -21,7 +19,8 @@
     "span-b": "Rebuilt after a partial failure. The replacement span is a different width from the original deck.",
     "span-c": "Held under private concession. Its posted load limit is lower than its rated capacity.",
     "span-d": "Carries a telemetry conduit alongside the roadway, installed after the deck itself.",
-    "site-ne-1": "A tower that sings in one language\na voice once loved, all day, all night\neach word meaning only itself\nit asks you to come home\nbelow, they answer in the gaps\n\nThe Eye stands in the clearing at the centre of Silence, a fenced broadcast tower ringed with loudspeaker horns. It plays Language without pause: announcements, lessons and songs, sung by a voice no one on the island can name. The broadcasts predate everyone now held here, and no record states who they were first meant for. The detained answer in (___), which the horns cannot carry."
+    "site-ne-1": "A tower that sings in one language\na voice once loved, all day, all night\neach word meaning only itself\nit asks you to come home\nbelow, they answer in the gaps\n\nThe Eye stands in the clearing at the centre of Silence, a fenced broadcast tower ringed with loudspeaker horns. It plays Language without pause: announcements, lessons and songs, sung by a voice no one on the island can name. The broadcasts predate everyone now held here, and no record states who they were first meant for. The detained answer in (___), which the horns cannot carry.",
+    "site-sw-2": "A garden laid on borrowed soil\nbirds return to a place that is gone\ncalling a name no one can read\nthe grown hear only birdsong\nthe children stop and answer\n\nLaid on reclaimed reef, a Republic botanical garden no one visits. Salt rises through the imported soil and the lawns are reseeded every season. Each year migratory birds land where the reef once was, calling a single word, zauran. Gardeners chase them off as pests. Children who hear it stop and call back, and the Remembered who hear it cannot say why they remember."
   },
   "dialogue": {
     "site-re-1": [
@@ -114,20 +113,52 @@
     ],
     "site-ne-2": [
       {
-        "s": "L",
-        "t": "Identical, and counted daily. The count is the day."
-      },
-      {
         "s": "R",
-        "t": "Uniform barrack footprint. Structural load is fixed by ordinance, because varying it would tilt Concord."
+        "t": "It's quieter here. The feed's almost clear."
       },
       {
         "s": "L",
-        "t": "You hear it from the water if the wind is right."
+        "t": "Thick walls. They don't want the prisoners speaking to each other."
       },
       {
         "s": "R",
-        "t": "The ordinance does not say why. It never has."
+        "t": "The lights, they seem strange."
+      },
+      {
+        "s": "L",
+        "t": "They do, don't they? The prisoners use them to talk. A code of dots and dashes."
+      },
+      {
+        "s": "R",
+        "t": "Like Morse. Did you know prisoners of war in Vietnam talked through their cell walls by tapping? Five rows, five columns, a letter in every square."
+      },
+      {
+        "s": "L",
+        "t": "Twenty-five squares."
+      },
+      {
+        "s": "R",
+        "t": "They dropped the K and used C instead. They had to lose a letter to make the language fit the walls."
+      },
+      {
+        "s": "L",
+        "t": "Only one?"
+      },
+      {
+        "s": "R",
+        "t": "What are they saying tonight?"
+      },
+      {
+        "s": "L",
+        "t": "Can you read it?"
+      },
+      {
+        "s": "R",
+        "t": "(___)"
+      },
+      {
+        "s": "L",
+        "t": "Adler?"
       }
     ],
     "site-nw-1": [
@@ -200,56 +231,60 @@
     ],
     "site-sw-1": [
       {
-        "s": "L",
-        "t": "Nothing happened here. You can see that nothing happened here."
-      },
-      {
         "s": "R",
-        "t": "Rebuilt so completely after the rupture that no damage survives in the fabric. The absence of scarring is the evidence."
+        "t": "There are families everywhere. In every window."
       },
       {
         "s": "L",
-        "t": "That is exactly how it was put to me, word for word."
+        "t": "What families?"
       },
       {
         "s": "R",
-        "t": "You can date a clearance by how clean it is."
-      }
-    ],
-    "site-sw-2": [
-      {
-        "s": "L",
-        "t": "The good air. It is bought, not zoned."
-      },
-      {
-        "s": "R",
-        "t": "Reinforced private frontage sitting directly over the pile cap shared with Silence."
+        "t": "Smiling. All of them."
       },
       {
         "s": "L",
-        "t": "You can smell the difference from the water. I am not joking."
+        "t": "Do they look happy?"
       },
       {
         "s": "R",
-        "t": "Every terrace added there is measured in settlement across the channel."
-      }
-    ],
-    "site-sw-3": [
-      {
-        "s": "L",
-        "t": "Built heavy on the far side, always. Do it the other way and the far shore suffers. Everyone knows that."
-      },
-      {
-        "s": "R",
-        "t": "Deliberate asymmetric loading, practised as custom with no reference to the engineering. The custom is correct; the reasoning was lost."
+        "t": "They look finished."
       },
       {
         "s": "L",
-        "t": "Ask why and you get a shrug. It is just what is done."
+        "t": "Like the houses."
       },
       {
         "s": "R",
-        "t": "A correct practice with a forgotten cause is still a record of the cause."
+        "t": "Did you know Henry Ford once built a Michigan town in the Amazon? Lawns, square dances, American food in the canteen. He called it Fordlândia."
+      },
+      {
+        "s": "L",
+        "t": "Who asked for it?"
+      },
+      {
+        "s": "R",
+        "t": "Nobody. The workers rioted over the canteen, the rubber died, and the jungle started taking it back."
+      },
+      {
+        "s": "L",
+        "t": "And the houses?"
+      },
+      {
+        "s": "R",
+        "t": "Some are still standing. Other people live in them now."
+      },
+      {
+        "s": "L",
+        "t": "Good."
+      },
+      {
+        "s": "R",
+        "t": "There's one at the window. He looks like you."
+      },
+      {
+        "s": "L",
+        "t": "Then he's early."
       }
     ],
     "site-se-1": [
@@ -444,6 +479,60 @@
       {
         "s": "L",
         "t": "This is home."
+      }
+    ],
+    "site-sw-2": [
+      {
+        "s": "R",
+        "t": "Birds. Hundreds of them, all over the lawns."
+      },
+      {
+        "s": "L",
+        "t": "Every year. They come for the reef."
+      },
+      {
+        "s": "R",
+        "t": "There isn't a reef."
+      },
+      {
+        "s": "L",
+        "t": "Not for us."
+      },
+      {
+        "s": "R",
+        "t": "What are they calling?"
+      },
+      {
+        "s": "L",
+        "t": "Zauran. It's what we call them."
+      },
+      {
+        "s": "R",
+        "t": "What does it mean?"
+      },
+      {
+        "s": "L",
+        "t": "I don't know."
+      },
+      {
+        "s": "R",
+        "t": "You always have an answer."
+      },
+      {
+        "s": "L",
+        "t": "Not for this one."
+      },
+      {
+        "s": "R",
+        "t": "The last speaker of the Atures language was a parrot. An explorer wrote down what it said. Two centuries later, an artist taught those words to new parrots."
+      },
+      {
+        "s": "L",
+        "t": "And none of them knew what they were saying."
+      },
+      {
+        "s": "R",
+        "t": "Listen. They're calling again."
       }
     ]
   },
