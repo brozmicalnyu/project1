@@ -23,7 +23,7 @@ const POI=[ // sites: d = index into ISLANDS, n = marker label, x/y = position o
   {d:3,n:'2',id:'site-sw-2',x:312,y:972,name:'THE GARDENS'},
 
   {d:4,n:'1',id:'site-se-1',x:952,y:912,name:'THE REGISTRY'},
-  {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE TESTIMONIES',nomad:true} // nomad: moves when you look away
+  {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE TESTIMONIES'}
 ];
 
 
@@ -39,85 +39,34 @@ async function loadDB(){
   }
 }
 
-const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
-const frame=document.getElementById('mapframe');
-const sv=document.getElementById('sv'), svx=sv.getContext('2d');
-let N=0; // map size, set once the chart loads
+const sv=document.getElementById('sv'), svx=sv.getContext('2d'); // the view panel is drawn on a canvas
 let sel=null; // the selected site, or null
-
-// ---- nomadic sites ----
-// the testimonies have no address: look away and they're somewhere new
-const NOMAD_SPOTS=[ // hand-picked inland spots on testament, all clear of the registry
-  [1072,934],[942,1002],[822,1038],[1026,846],[1068,1074],[858,954],[894,888],[984,1104]
-];
-let nomadBag=[]; // spots not yet used this cycle
-function relocate(p){ // move a nomad to a spot it hasn't used, until all are used
-  if(!nomadBag.length) nomadBag=shuffled(NOMAD_SPOTS).filter(([x,y])=>x!==p.x||y!==p.y);
-  [p.x,p.y]=nomadBag.pop();
-}
-function lookAway(prev){ // moves a nomad once it stops being looked at
-  if(prev && prev.nomad && sel!==prev) relocate(prev);
-}
 
 // ---- start-up ----
 const dbLoad = loadDB();
-const img=new Image(); // the chart itself
-img.onload=async ()=>{
-  await dbLoad;
-  N=img.width;
+dbLoad.then(()=>{ // once the text has loaded, fill in every panel
   drawPortraits(); updateHint(); renderInfo(); say();
   document.getElementById('boot').remove(); // hide LOADING CHART
   resize();
-};
-img.src='armature.png';
+});
 
 // ---- chart ----
-// the plan is shown exactly as drawn
+const map=document.getElementById('map');
+POI.forEach(p=>{ // one button per site, placed by percentage so it follows the image at any size
+  const b=document.createElement('button');
+  b.className='marker'; b.textContent=p.n;
+  b.setAttribute('aria-label', p.name); // read out by screen readers, not shown
+  b.style.left=(p.x/MAP*100)+'%'; b.style.top=(p.y/MAP*100)+'%';
+  b.addEventListener('click',()=>pick(p));
+  map.appendChild(b);
+  p.el=b; // keep the button on its site, so pick() can find it
+});
+function markSelected(){ POI.forEach(p=>p.el.classList.toggle('on', p===sel)); } // the selected button stops blinking
 
-let fitS=1, fitX=0, fitY=0; // scale and offset of the chart inside its frame
-function draw(){
-  if(!N) return; // chart not loaded yet
-  const w=canvas.width, h=canvas.height;
-  ctx.imageSmoothingEnabled=false;
-  ctx.fillStyle='rgb(85,85,85)'; // sea colour around the square chart
-  ctx.fillRect(0,0,w,h);
-  fitS=Math.min(w,h)/MAP;
-  fitX=(w-MAP*fitS)/2; fitY=(h-MAP*fitS)/2;
-  ctx.drawImage(img, fitX, fitY, MAP*fitS, MAP*fitS);
-  drawMarkers();
-}
-
-function drawMarkers(){ // redrawn every frame so unselected markers can blink
-  const S=Math.max(15,Math.round(N/56))*fitS;
-  const flip = Math.floor(performance.now()/500)%2===0; // hard on/off twice a second, like a cursor
-  const one=(wx,wy,label,on)=>{
-    const x=fitX+wx*fitS, y=fitY+wy*fitS;
-    const inverted = on ? true : flip; // the selected one holds still
-    ctx.save();
-    ctx.translate(x,y);
-    ctx.fillStyle='#000'; ctx.fillRect(-S/2-4,-S/2-4,S+8,S+8);
-    ctx.fillStyle='#fff'; ctx.fillRect(-S/2-2,-S/2-2,S+4,S+4);
-    ctx.fillStyle= inverted?'#fff':'#141414'; ctx.fillRect(-S/2,-S/2,S,S);
-    ctx.fillStyle= inverted?'#000':'#fff';
-    ctx.font='bold '+Math.round(S*0.8)+'px DotGothic16, monospace';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText(label, 0, S*0.04);
-    ctx.restore();
-  };
-  POI.forEach(p=> one(p.x,p.y,p.n, sel===p) );
-}
-
-(function pulseLoop(){ // keeps the markers blinking
-  if(N) draw();
-  requestAnimationFrame(pulseLoop);
-})();
-function resize(){ // match canvases to their frames, sharp on retina
-  const r=frame.getBoundingClientRect();
-  const dpr=Math.min(2,window.devicePixelRatio||1);
-  canvas.width=Math.round(r.width*dpr); canvas.height=Math.round(r.height*dpr);
+function resize(){ // keep the view canvas the same size as its panel
   const b=sv.getBoundingClientRect();
   sv.width=Math.max(1,Math.round(b.width)); sv.height=Math.max(1,Math.round(b.height));
-  draw(); drawSiteView();
+  drawSiteView();
 }
 window.addEventListener('resize',resize);
 
@@ -294,12 +243,6 @@ function noteVisit(id){ // a full pass over every site moves to the next round
   if(seen.size===POI.length && round<3){ round++; seen.clear(); }
 }
 
-function shuffled(a){ // copy, shuffled
-  a=a.slice();
-  for(let k=a.length-1;k>0;k--){ const j=Math.floor(Math.random()*(k+1)); [a[k],a[j]]=[a[j],a[k]]; }
-  return a;
-}
-
 function unread(text, level){ // blank some words; spaces, line breaks and punctuation stay
   return text.replace(/\w+/g, w => {
     if(w==='___') return w; // the inside of an existing (___): leave it
@@ -309,22 +252,11 @@ function unread(text, level){ // blank some words; spaces, line breaks and punct
 
 // ---- selection ----
 function pick(p){ // select a site; clicking the selected one again deselects it
-  const prev=sel;
   sel = (sel===p) ? null : p;
-  lookAway(prev);
   unreadLevel=0;
   if(sel) noteVisit(sel.id);
-  draw(); drawSiteView(); updateHint(); renderInfo(); say();
+  markSelected(); drawSiteView(); updateHint(); renderInfo(); say();
 }
-canvas.addEventListener('click',e=>{ // select the nearest marker to the click, if any
-  const r=canvas.getBoundingClientRect();
-  const dpr=canvas.width/r.width;
-  const mx=((e.clientX-r.left)*dpr-fitX)/fitS, my=((e.clientY-r.top)*dpr-fitY)/fitS;
-  let hit=null, bd=34; // click radius around a marker, in chart pixels
-  POI.forEach(p=>{ const d=Math.hypot(p.x-mx,p.y-my); if(d<bd){bd=d;hit=p;} });
-  if(hit) pick(hit);
-});
-
 function updateHint(){ // the hint strip in the chart's corner
   const hint=document.getElementById('maphint');
   if(hint){
@@ -333,7 +265,7 @@ function updateHint(){ // the hint strip in the chart's corner
   }
 }
 function clearSel(){ // escape: select nothing
-  const prev=sel; sel=null; lookAway(prev); draw(); drawSiteView(); updateHint(); renderInfo(); say();
+  if(sel) pick(sel); // picking the selected site again deselects it
 }
 
 window.addEventListener('keydown',e=>{ // space advances the codec, escape clears
