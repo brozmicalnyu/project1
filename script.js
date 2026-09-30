@@ -39,34 +39,71 @@ async function loadDB(){
   }
 }
 
-const sv=document.getElementById('sv'), svx=sv.getContext('2d'); // the view panel is drawn on a canvas
+const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
+const frame=document.getElementById('mapframe');
+const sv=document.getElementById('sv'), svx=sv.getContext('2d');
+let N=0; // map size, set once the chart loads
 let sel=null; // the selected site, or null
 
 // ---- start-up ----
 const dbLoad = loadDB();
-dbLoad.then(()=>{ // once the text has loaded, fill in every panel
+const img=new Image(); // the chart itself
+img.onload=async ()=>{
+  await dbLoad;
+  N=img.width;
   drawPortraits(); updateHint(); renderInfo(); say();
   document.getElementById('boot').remove(); // hide LOADING CHART
   resize();
-});
+};
+img.src='armature.png';
 
 // ---- chart ----
-const map=document.getElementById('map');
-POI.forEach(p=>{ // one button per site, placed by percentage so it follows the image at any size
-  const b=document.createElement('button');
-  b.className='marker'; b.textContent=p.n;
-  b.setAttribute('aria-label', p.name); // read out by screen readers, not shown
-  b.style.left=(p.x/MAP*100)+'%'; b.style.top=(p.y/MAP*100)+'%';
-  b.addEventListener('click',()=>pick(p));
-  map.appendChild(b);
-  p.el=b; // keep the button on its site, so pick() can find it
-});
-function markSelected(){ POI.forEach(p=>p.el.classList.toggle('on', p===sel)); } // the selected button stops blinking
+// the plan is shown exactly as drawn
 
-function resize(){ // keep the view canvas the same size as its panel
+let fitS=1, fitX=0, fitY=0; // scale and offset of the chart inside its frame
+function draw(){
+  if(!N) return; // chart not loaded yet
+  const w=canvas.width, h=canvas.height;
+  ctx.imageSmoothingEnabled=false;
+  ctx.fillStyle='rgb(85,85,85)'; // sea colour around the square chart
+  ctx.fillRect(0,0,w,h);
+  fitS=Math.min(w,h)/MAP;
+  fitX=(w-MAP*fitS)/2; fitY=(h-MAP*fitS)/2;
+  ctx.drawImage(img, fitX, fitY, MAP*fitS, MAP*fitS);
+  drawMarkers();
+}
+
+function drawMarkers(){ // redrawn every frame so unselected markers can blink
+  const S=Math.max(15,Math.round(N/56))*fitS;
+  const flip = Math.floor(performance.now()/500)%2===0; // hard on/off twice a second, like a cursor
+  const one=(wx,wy,label,on)=>{
+    const x=fitX+wx*fitS, y=fitY+wy*fitS;
+    const inverted = on ? true : flip; // the selected one holds still
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.fillStyle='#000'; ctx.fillRect(-S/2-4,-S/2-4,S+8,S+8);
+    ctx.fillStyle='#fff'; ctx.fillRect(-S/2-2,-S/2-2,S+4,S+4);
+    ctx.fillStyle= inverted?'#fff':'#141414'; ctx.fillRect(-S/2,-S/2,S,S);
+    ctx.fillStyle= inverted?'#000':'#fff';
+    ctx.font='bold '+Math.round(S*0.8)+'px DotGothic16, monospace';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(label, 0, S*0.04);
+    ctx.restore();
+  };
+  POI.forEach(p=> one(p.x,p.y,p.n, sel===p) );
+}
+
+(function pulseLoop(){ // keeps the markers blinking
+  if(N) draw();
+  requestAnimationFrame(pulseLoop);
+})();
+function resize(){ // match canvases to their frames, sharp on retina
+  const r=frame.getBoundingClientRect();
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  canvas.width=Math.round(r.width*dpr); canvas.height=Math.round(r.height*dpr);
   const b=sv.getBoundingClientRect();
   sv.width=Math.max(1,Math.round(b.width)); sv.height=Math.max(1,Math.round(b.height));
-  drawSiteView();
+  draw(); drawSiteView();
 }
 window.addEventListener('resize',resize);
 
@@ -255,8 +292,17 @@ function pick(p){ // select a site; clicking the selected one again deselects it
   sel = (sel===p) ? null : p;
   unreadLevel=0;
   if(sel) noteVisit(sel.id);
-  markSelected(); drawSiteView(); updateHint(); renderInfo(); say();
+  draw(); drawSiteView(); updateHint(); renderInfo(); say();
 }
+canvas.addEventListener('click',e=>{ // select the nearest marker to the click, if any
+  const r=canvas.getBoundingClientRect();
+  const dpr=canvas.width/r.width;
+  const mx=((e.clientX-r.left)*dpr-fitX)/fitS, my=((e.clientY-r.top)*dpr-fitY)/fitS;
+  let hit=null, bd=34; // click radius around a marker, in chart pixels
+  POI.forEach(p=>{ const d=Math.hypot(p.x-mx,p.y-my); if(d<bd){bd=d;hit=p;} });
+  if(hit) pick(hit);
+});
+
 function updateHint(){ // the hint strip in the chart's corner
   const hint=document.getElementById('maphint');
   if(hint){
@@ -265,7 +311,7 @@ function updateHint(){ // the hint strip in the chart's corner
   }
 }
 function clearSel(){ // escape: select nothing
-  if(sel) pick(sel); // picking the selected site again deselects it
+  sel=null; draw(); drawSiteView(); updateHint(); renderInfo(); say();
 }
 
 window.addEventListener('keydown',e=>{ // space advances the codec, escape clears

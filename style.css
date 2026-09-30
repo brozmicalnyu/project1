@@ -28,26 +28,11 @@ body{
 
 /* chart: fills the space left over */
 #main{ flex:1; display:flex; min-height:0; }
-#mapframe{ flex:1; min-width:0; overflow:hidden; background:#555555; position:relative;
-  display:grid; place-items:center; container-type:size; /* container-type lets children size themselves with cqw / cqh */ }
-#map{ position:relative; width:min(100cqw,100cqh); height:min(100cqw,100cqh); container-type:size; } /* the biggest square that fits */
-#chart{ display:block; width:100%; height:100%; image-rendering:pixelated; } /* crisp pixels */
+#mapframe{ flex:1; min-width:0; overflow:hidden; background:#555555; position:relative; }
 #maphint{ /* hint strip, bottom-left of the chart */ position:absolute; left:8px; bottom:8px; z-index:5; pointer-events:none;
   background:var(--g0); color:var(--g5); border:1px solid var(--g3);
   padding:4px 8px; font-size:10px; letter-spacing:.04em; }
-
-/* site markers: buttons placed over the chart by script.js */
-.marker{ --m:max(1.75cqw,18px); /* marker size: a share of the chart, never smaller than 18px */
-  position:absolute; transform:translate(-50%,-50%); /* left/top point at the marker's centre */
-  box-sizing:content-box; width:var(--m); height:var(--m); padding:0;
-  border:2px solid #fff; box-shadow:0 0 0 2px #000; /* white ring, then a black ring */
-  background:#141414; color:#fff; cursor:crosshair;
-  font-family:'DotGothic16',monospace; font-weight:700; font-size:calc(var(--m)*.8); line-height:1;
-  animation:blink 1s steps(1) infinite; /* steps(1): a hard on/off flip, like a cursor */ }
-.marker::before{ content:''; position:absolute; inset:-8px; } /* a bigger area to click than the box itself */
-.marker.on{ background:#fff; color:#000; animation:none; } /* the selected one holds still */
-.marker:focus-visible{ outline:2px dashed #fff; outline-offset:5px; } /* keyboard focus */
-@keyframes blink{ 50%{ background:#fff; color:#000; } } /* halfway through each second, swap the colours */
+#mapframe canvas{ /* crisp pixels, crosshair to invite clicking */ display:block; width:100%; height:100%; image-rendering:pixelated; cursor:crosshair; }
 
 /* lower deck: view, site, codec side by side */
 #lower{ height:268px; flex:none; display:flex; gap:7px; }
