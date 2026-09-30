@@ -1,12 +1,11 @@
 :root{
-  /* a six-step grey ramp — enough separation for the chart to read,
-     still no hue anywhere */
+  /* greys only, no hue anywhere */
   --g0:#000000; --g1:#1c1c1c; --g2:#3a3a3a; --g3:#6a6a6a;
   --g4:#9a9a9a; --g5:#c8c8c8; --g6:#ffffff;
   --blk:#000000; --wht:#ffffff;
-  color-scheme:dark;
+  color-scheme:dark; /* dark browser scrollbars and controls */
   box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
+  padding-top:env(safe-area-inset-top,0px); /* clear of phone notches and bars */
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -14,60 +13,64 @@ html,body{height:100%;}
 body{
   background:var(--blk); color:var(--wht);
   font-family:'DotGothic16',ui-monospace,monospace;
-  overflow:hidden; display:flex; flex-direction:column; gap:7px; padding:9px;
+  overflow:hidden; display:flex; flex-direction:column; gap:7px; padding:9px; /* header, chart, lower deck stacked; page never scrolls */
 }
 .px{ letter-spacing:.02em; }
+/* shared panel chrome */
 .frame{ border:2px solid var(--g4); background:var(--g0); position:relative; }
 .frame.olive{ border-color:var(--g6); }
-.hd{ background:var(--g5); color:var(--g0); font-size:11px; padding:4px 8px; letter-spacing:.06em; }
+.hd{ /* panel title strip */ background:var(--g5); color:var(--g0); font-size:11px; padding:4px 8px; letter-spacing:.06em; }
 
+/* title bar */
 #hdr{ flex:none; display:flex; gap:7px; }
 #hdr .bar{ flex:1; background:var(--g6); color:var(--g0); padding:7px 12px; }
 #hdr .bar .t{ font-size:17px; letter-spacing:.05em; }
 
-/* chart fills its frame edge to edge, sea included */
+/* chart: fills the space left over */
 #main{ flex:1; display:flex; min-height:0; }
 #mapframe{ flex:1; min-width:0; overflow:hidden; background:#555555; position:relative; }
-#maphint{ position:absolute; left:8px; bottom:8px; z-index:5; pointer-events:none;
+#maphint{ /* hint strip, bottom-left of the chart */ position:absolute; left:8px; bottom:8px; z-index:5; pointer-events:none;
   background:var(--g0); color:var(--g5); border:1px solid var(--g3);
   padding:4px 8px; font-size:10px; letter-spacing:.04em; }
-#mapframe canvas{ display:block; width:100%; height:100%; image-rendering:pixelated; cursor:crosshair; }
+#mapframe canvas{ /* crisp pixels, crosshair to invite clicking */ display:block; width:100%; height:100%; image-rendering:pixelated; cursor:crosshair; }
 
-/* ---- lower deck ---- */
+/* lower deck: view, site, codec side by side */
 #lower{ height:268px; flex:none; display:flex; gap:7px; }
 
 #viewbox{ width:214px; flex:none; display:flex; flex-direction:column; }
-/* fills whatever height the row gives it, same as SITE and CODEC;
-   script.js does the cover-crop + focal-point centring so the subject
-   stays framed correctly regardless of the panel's actual shape */
+/* view: script.js crops the image to whatever shape this ends up */
 #viewbox .body{ flex:1; width:100%; position:relative; overflow:hidden; background:var(--g0); }
 #viewbox canvas{ position:absolute; inset:0; width:100%; height:100%; image-rendering:pixelated; }
+/* site panel */
 #svbox{ flex:1 1 0; max-width:50%; min-width:0; display:flex; flex-direction:column; }
 
 .facts{ flex:1; min-width:0; overflow-y:auto; padding:10px 13px 12px; }
 
-.facts .bd{ font-size:12px; line-height:1.85; color:var(--g5); max-width:56ch; white-space:pre-line; }
-.facts .verse{ font-size:12px; line-height:1.85; color:var(--g6); max-width:56ch; margin-bottom:1.85em; }
-.facts .verse .vl{ padding-left:1.5em; text-indent:-1.5em; }
-.facts .frag{ font-size:13px; line-height:1.9; color:var(--g5); font-style:italic; max-width:52ch; }
+.facts .bd{ /* the neutral paragraph */ font-size:12px; line-height:1.85; color:var(--g5); max-width:56ch; white-space:pre-line; }
+.facts .verse{ /* the five-line verse, brighter than the paragraph */ font-size:12px; line-height:1.85; color:var(--g6); max-width:56ch; margin-bottom:1.85em; }
+.facts .verse .vl{ /* hanging indent: a wrapped line still reads as one */ padding-left:1.5em; text-indent:-1.5em; }
+.facts .frag{ /* the lanting saying, shown when nothing is selected */ font-size:13px; line-height:1.9; color:var(--g5); font-style:italic; max-width:52ch; }
 .facts .src{ font-size:10px; font-style:normal; color:var(--g3); margin-top:8px; }
-.facts h4{ font-size:11px; color:var(--g0); background:var(--g5); display:inline-block; padding:3px 5px; line-height:1.35; margin-bottom:8px; }
+.facts h4{ /* site name tag */ font-size:11px; color:var(--g0); background:var(--g5); display:inline-block; padding:3px 5px; line-height:1.35; margin-bottom:8px; }
 
+/* codec */
 #talkbox{ flex:1; min-width:380px; display:flex; flex-direction:column; }
 .talkrow{ flex:1; display:flex; gap:9px; padding:10px; min-height:0; align-items:stretch; }
 .port{ width:104px; flex:none; display:flex; flex-direction:column; gap:5px; }
-.port canvas{ width:104px; height:104px; image-rendering:pixelated; background:var(--g0); border:2px solid var(--g2); opacity:.45; }
+.port canvas{ /* portraits dim until their speaker talks */ width:104px; height:104px; image-rendering:pixelated; background:var(--g0); border:2px solid var(--g2); opacity:.45; }
 .port .nm{ font-size:7px; color:var(--g3); line-height:1.5; }
 .port .nm span{ color:var(--g3); }
-.port.on canvas{ opacity:1; border-color:var(--g6); }
+.port.on canvas{ /* the one speaking */ opacity:1; border-color:var(--g6); }
 .port.on .nm{ color:var(--g6); }
 .speech{ flex:1; min-width:0; border:1px solid var(--g2); background:var(--g1); padding:10px 12px; display:flex; flex-direction:column; }
-.speech .who{ font-size:8px; color:var(--g0); background:var(--g5); display:inline-block; align-self:flex-start; padding:2px 5px; margin-bottom:8px; }
+.speech .who{ /* speaker name tag */ font-size:8px; color:var(--g0); background:var(--g5); display:inline-block; align-self:flex-start; padding:2px 5px; margin-bottom:8px; }
 .speech .line{ font-size:14px; line-height:1.78; color:var(--g6); flex:1; overflow-y:auto; }
-.speech .adv{ font-size:8px; color:var(--g3); margin-top:7px; }
+.speech .adv{ /* click / space prompt */ font-size:8px; color:var(--g3); margin-top:7px; }
 
+/* loading cover, removed once the chart is ready */
 #boot{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
   background:var(--blk); color:var(--wht); font-size:9px; z-index:99; }
+/* narrow screens: lower deck stacks vertically */
 @media (max-width:1040px){
   #lower{ height:auto; flex-direction:column; }
   #viewbox{ width:100%; height:200px; }
