@@ -1,26 +1,20 @@
 {
   "hist": {
-    "island-core": "Named by the Eastern Shoals Company for those lost on the passage. The name was never revised by any later administration.",
-    "island-ne": "Absent from the current civic register. Older charts give a name the present administration does not use.",
-    "island-nw": "Retains a customs exemption dating to the Company concession. The exemption was never formally closed.",
-    "island-sw": "Renamed by the Republic for the residents it expects. The earlier Protectorate name, Concord, is no longer in administrative use.",
-    "island-se": "The name in current administrative use. An earlier name remains in circulation on charts from the other claimant.",
+    "island-core": "The centre of the archipelago, where all four causeways meet. Both peoples hold it sacred, and neither can recall why. Its oldest structures are watched from both sides.",
+    "island-ne": "The archipelago's place of detention, kept off the civic register. Remembered prisoners who refuse the new Language are held here, within range of a broadcast that does not stop.",
+    "island-nw": "The archipelago's point of entry. Arrivals sit the Language exam here and wait here when they fail it. The customs exemption means no authority can clear what grows in the waiting.",
+    "island-sw": "A residential island built for Republic families who have not arrived. Its roads, houses and gardens are maintained in full, for a population that exists in the future.",
+    "island-se": "The seat of government, and the one island where both peoples' kinds of proof are made. The Republic's is written and filed at the Registry. The Remembered congregate at the Testimonies, to lament a Redacted past.",
     "site-re-1": "Four fingers made from ruin reaching into the sky\na skeletal hand, victim of unknown conflict\na site for a communion ungrasped\na gesture from a time unremembered\na fifth finger excised.\n\nThe central landmark of Remembrance, the Void is a sacred, taboo site for both the Republic and the Remembered. Each believes it to be the location of a key battle during the war of the Redaction. Neither can recall its significance, nor what structures stood there before.",
     "site-re-2": "The Watchtower stands as a pointed finger\nBeckoning towards distant shores or\nOstracizing those who linger\nA cypher once stood here, now unmade and unread.\nOne hand waves ships in. The same hand waves them off.\n\nThis lone watchtower is Remembrance's oldest structure, raised soon after the Company's charting to watch the channel for incoming vessels. Built over a now-lost Lanting monument, the tower now maintains two crews, each operating different shifts using different stairways for entry. The Republic crews control immigration, and observe and welcome new immigrants from the Interzone, while a Remembered team covertly controls expulsion, marking those to be driven out.",
     "site-ne-2": "Across Silence, surrounding the Eye, hushed buildings lie squat. Remembered prisoners live within these cells, those who refuse to listen to the new Language. They are counted each morning and left in the dark each night, when a few windows are lit in undeciphered patterns, changing nightly and never repeated.",
     "site-nw-1": "Its name is the place between\na dark road for the Remembered\na drowned ruin that rises with the tide.\nTwo brothers raised four islands\nA fifth one now held up, awoken\n\nThe marshland known to locals as the Low Spaces is built upon Lanting-era megaliths, the burial sites of the islands' mythical founders, a pair of divine snake twins who raised the islands from the sea. Rumoured to be haunted, its impenetrable mangrove serves smugglers as a route: books come in and (___) is carried out.",
     "site-nw-3": "A market grown in the queue for a door\none wall of words that may be said, each meaning only itself\none wall of brackets where the banned ones were\nthe failed wait here until the waiting is an address\nthe ones who pass are not seen again\n\nPortside grew in the yard outside the Examination Halls, where candidates who fail the exam wait to sit it again. Kept empty by design and never cleared, since the Interzone's customs exemption leaves no authority able to clear it, it is now a market in dozens of languages, selling coached scripts, forged certificates and interpreters, and taking in books from outside. Two walls face the lane. One lists the words the Republic allows, each set equal to itself; the other holds only empty brackets, since a banned word is never written down.",
     "site-sw-1": "Empty houses await their families\ntables set, beds made\nin the lit windows, faces\nperfectly spoken, perfectly alike\nwhen they settle, nothing more will be said\n\nHomeland was built to house Republic families who never arrived. Children who slip in after dark tell of families already living there. Every child describes them the same way: faces like their own, speaking a language familiar but unrecognised. Adults driving past see only lit windows and empty show homes.",
-    "site-se-1": "Established to monitor settlement across the archipelago. Its findings are not a matter of public record.",
-    "site-se-2": "Contractor records, unclaimed after dissolution. Sealed by default, not by order.",
-    "site-se-3": "Issues consent for construction. Heavy load applications are subject to an unwritten review.",
-    "site-se-4": "Paired with the station on the Interzone. The pairing is not named in either island's charter.",
-    "span-a": "Checkpointed at both landings since construction. No alternate route between the outer islands exists.",
-    "span-b": "Rebuilt after a partial failure. The replacement span is a different width from the original deck.",
-    "span-c": "Held under private concession. Its posted load limit is lower than its rated capacity.",
-    "span-d": "Carries a telemetry conduit alongside the roadway, installed after the deck itself.",
     "site-ne-1": "A tower that sings in one language\na voice once loved, all day, all night\neach word meaning only itself\nit asks you to come home\nbelow, they answer in the gaps\n\nThe Eye stands in the clearing at the centre of Silence, a fenced broadcast tower ringed with loudspeaker horns. It plays Language without pause: announcements, lessons and songs, sung by a voice no one on the island can name. The broadcasts predate everyone now held here, and no record states who they were first meant for. The detained answer in (___), which the horns cannot carry.",
-    "site-sw-2": "A garden laid on borrowed soil\nbirds return to a place that is gone\ncalling a name no one can read\nthe grown hear only birdsong\nthe children stop and answer\n\nLaid on reclaimed reef, a Republic botanical garden no one visits. Salt rises through the imported soil and the lawns are reseeded every season. Each year migratory birds land where the reef once was, calling a single word, zauran. Gardeners chase them off as pests. Children who hear it stop and call back, and the Remembered who hear it cannot say why they remember."
+    "site-sw-2": "A garden laid on borrowed soil\nbirds return to a place that is gone\ncalling a name no one can read\nthe grown hear only birdsong\nthe children stop and answer\n\nLaid on reclaimed reef, a Republic botanical garden no one visits. Salt rises through the imported soil and the lawns are reseeded every season. Each year migratory birds land where the reef once was, calling a single word, zauran. Gardeners chase them off as pests. Children who hear it stop and call back, and the Remembered who hear it cannot say why they remember.",
+    "site-se-1": "To be known you must be named\nthe terms corrected, each line altered\nnow the state can find you anywhere\nyour grandmother cannot\none seal on both at once\n\nThe Registry is the only office on the archipelago that both peoples use, though neither will say so. An applicant gives a name and receives it back in Language, spelled the one correct way. The original is filed in a sealed room at the back of the building, with the contractor's records, sealed by default rather than by order.",
+    "site-se-2": "Our word for world is word\nspoken once, before witnesses\nnothing written, nothing filed\na hand raised, finger pointed\nwherever they gather, it is so\n\nThe Testimonies are held wherever the witnesses happen to be, never twice in the same place. Here the Remembered speak what the Redaction took: names, places and words that exist in no record, passed from one witness to the next. Much of it is carried in the pauses, and some of it is spoken as (___)."
   },
   "dialogue": {
     "site-re-1": [
@@ -287,150 +281,6 @@
         "t": "Then he's early."
       }
     ],
-    "site-se-1": [
-      {
-        "s": "L",
-        "t": "The office that keeps the islands level. That is the whole of the public description."
-      },
-      {
-        "s": "R",
-        "t": "Statutory remit: detect and correct differential settlement. Actual function: hold the coupling data and decline to publish."
-      },
-      {
-        "s": "L",
-        "t": "Nobody I know has been inside."
-      },
-      {
-        "s": "R",
-        "t": "It is the only body that could prove the pairing, and the only one that will not."
-      }
-    ],
-    "site-se-2": [
-      {
-        "s": "L",
-        "t": "The old papers. Lost in a merger, they say, and nobody has ever named the company."
-      },
-      {
-        "s": "R",
-        "t": "Original contractor records. Proprietary when filed, unclaimed after dissolution, sealed by default rather than by decision."
-      },
-      {
-        "s": "L",
-        "t": "A story that has been told the same way for forty years."
-      },
-      {
-        "s": "R",
-        "t": "Not a conspiracy. An absence that nobody had standing to fill."
-      }
-    ],
-    "site-se-3": [
-      {
-        "s": "L",
-        "t": "You may build. The question is whether you may build heavy."
-      },
-      {
-        "s": "R",
-        "t": "Load consent issued here, silently checked against the paired island\\u2019s current settlement figure."
-      },
-      {
-        "s": "L",
-        "t": "Light construction, no trouble. Heavy, and the file goes quiet."
-      },
-      {
-        "s": "R",
-        "t": "The check is not written into any statute I can find."
-      }
-    ],
-    "site-se-4": [
-      {
-        "s": "L",
-        "t": "Its twin is across the water. Children are told they are talking to each other."
-      },
-      {
-        "s": "R",
-        "t": "Paired inclinometer to the Interzone station. This pairing is what the folk account describes correctly and explains wrongly."
-      },
-      {
-        "s": "L",
-        "t": "A nice story. It happens to be true."
-      },
-      {
-        "s": "R",
-        "t": "They got the mechanism right and lost the reason. That is usually the order."
-      }
-    ],
-    "span-a": [
-      {
-        "s": "L",
-        "t": "You do not walk this one for pleasure. There is one reason to be on it, in either direction."
-      },
-      {
-        "s": "R",
-        "t": "Single carriageway, checkpointed both landings. Every span terminates on Remembrance, so nothing moves between outer islands without passing through it."
-      },
-      {
-        "s": "L",
-        "t": "Empty most days. Never quiet."
-      },
-      {
-        "s": "R",
-        "t": "There is no route between two outer islands. By design."
-      }
-    ],
-    "span-b": [
-      {
-        "s": "L",
-        "t": "The newcomers\\u2019 road. Widened twice and still not wide enough."
-      },
-      {
-        "s": "R",
-        "t": "Highest-volume span. Rebuilt after partial collapse; the replacement deck is a different width and the join is visible."
-      },
-      {
-        "s": "L",
-        "t": "Everything that arrives here crosses it eventually."
-      },
-      {
-        "s": "R",
-        "t": "No collapse appears in any record I have access to."
-      }
-    ],
-    "span-c": [
-      {
-        "s": "L",
-        "t": "Quiet, well kept, and busier than it looks."
-      },
-      {
-        "s": "R",
-        "t": "Privately maintained under concession. Load-restricted — stated as a deck limit, actually a ballast limit."
-      },
-      {
-        "s": "L",
-        "t": "The gate is open. It is simply never used by us."
-      },
-      {
-        "s": "R",
-        "t": "A deck that grade could carry three times the posted figure."
-      }
-    ],
-    "span-d": [
-      {
-        "s": "L",
-        "t": "The paperwork road."
-      },
-      {
-        "s": "R",
-        "t": "Administrative link carrying the tilt telemetry conduit beside the roadway. The conduit is why the footing is oversized."
-      },
-      {
-        "s": "L",
-        "t": "Two lanes of forms, going both ways."
-      },
-      {
-        "s": "R",
-        "t": "The data crosses. The findings never do."
-      }
-    ],
     "site-ne-1": [
       {
         "s": "R",
@@ -533,6 +383,114 @@
       {
         "s": "R",
         "t": "Listen. They're calling again."
+      }
+    ],
+    "site-se-1": [
+      {
+        "s": "R",
+        "t": "Two queues, one counter. Nobody looks at the other line."
+      },
+      {
+        "s": "L",
+        "t": "It's one line. Everyone pretends otherwise."
+      },
+      {
+        "s": "R",
+        "t": "I requested your file."
+      },
+      {
+        "s": "L",
+        "t": "Which one?"
+      },
+      {
+        "s": "R",
+        "t": "There's only one. Your name's spelled differently. Your father's doesn't match."
+      },
+      {
+        "s": "L",
+        "t": "Then it's correct."
+      },
+      {
+        "s": "R",
+        "t": "Did you know that in 1849 the Spanish gave every family in the Philippines a surname from a catalogue? Some towns, everyone's name starts with the same letter."
+      },
+      {
+        "s": "L",
+        "t": "And the names they had before?"
+      },
+      {
+        "s": "R",
+        "t": "Nobody wrote them down."
+      },
+      {
+        "s": "L",
+        "t": "Somebody remembers them."
+      },
+      {
+        "s": "R",
+        "t": "So whose name is on your file?"
+      },
+      {
+        "s": "L",
+        "t": "Not mine. Rawi is what my grandmother calls me."
+      }
+    ],
+    "site-se-2": [
+      {
+        "s": "R",
+        "t": "The Republic sends clerks. I've read their transcripts."
+      },
+      {
+        "s": "L",
+        "t": "And?"
+      },
+      {
+        "s": "R",
+        "t": "Pages of blanks. Every few words, a gap."
+      },
+      {
+        "s": "L",
+        "t": "Then they wrote it down correctly."
+      },
+      {
+        "s": "R",
+        "t": "Did you know a Canadian court once had to decide whether oral histories counted as evidence? The first judge said they barely did. It took six years to overturn him."
+      },
+      {
+        "s": "L",
+        "t": "And now they count?"
+      },
+      {
+        "s": "R",
+        "t": "Now they're allowed to be heard."
+      },
+      {
+        "s": "L",
+        "t": "Heard isn't kept. Would you keep something for us?"
+      },
+      {
+        "s": "R",
+        "t": "What?"
+      },
+      {
+        "s": "L",
+        "t": "Say it back to me. Words can be worlds."
+      },
+      {
+        "s": "R",
+        "t": "Words can be worlds."
+      },
+      {
+        "s": "L",
+        "t": "Words can be weapons too."
+      },
+      {
+        "s": "R",
+        "t": "Words can be weapons too."
+      },
+      {
+        "s": "L",
+        "t": "Now it's witnessed."
       }
     ]
   },

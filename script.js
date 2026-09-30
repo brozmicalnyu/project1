@@ -32,12 +32,6 @@ const POI=[ // sites: d = island index, n = marker label, x/y = position on the 
   {d:4,n:'2',id:'site-se-2',x:1072,y:934,name:'THE TESTIMONIES',nomad:true} // nomad: moves when you look away
 ];
 
-const BRIDGES=[ // causeways: to = the island each one leads to
-  {n:'A',id:'span-a',x:810,y:457,to:1,name:'CAUSEWAY A'},
-  {n:'B',id:'span-b',x:436,y:456,to:2,name:'CAUSEWAY B'},
-  {n:'C',id:'span-c',x:442,y:808,to:3,name:'CAUSEWAY C'},
-  {n:'D',id:'span-d',x:807,y:810,to:4,name:'CAUSEWAY D'}
-];
 
 // ---- text ----
 let DB = { hist:{}, dialogue:{}, intro:[] }; // all writing lives in city-database.json, not here
@@ -55,7 +49,7 @@ const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
 const frame=document.getElementById('mapframe');
 const sv=document.getElementById('sv'), svx=sv.getContext('2d');
 let N=0, sheet=null, lit=null; // map size, the drawn chart, and a scratch layer for the lit island
-let sel=null; // what's selected: an island, a site or a span
+let sel=null; // what's selected: an island or a site
 
 // ---- islands ----
 // each island is a mask png (white = island), edited in photoshop, not code
@@ -95,7 +89,7 @@ function landPoints(k){ // every inland point on island k, from its mask
 function relocate(p){ // move a nomad to fresh ground
   const pts=landPoints(p.d); if(!pts.length) return;
   p.seen=p.seen||[[p.x,p.y]]; // everywhere it has been
-  const others=POI.filter(q=>q!==p).concat(BRIDGES);
+  const others=POI.filter(q=>q!==p);
   const clear=(x,y,far)=> others.every(q=>Math.hypot(q.x-x,q.y-y)>=45) // never on top of another marker
                        && p.seen.every(([sx,sy])=>Math.hypot(sx-x,sy-y)>=far);
   let spot=null;
@@ -178,7 +172,6 @@ function drawMarkers(){ // redrawn every frame so unselected markers can blink
     ctx.fillText(label, 0, S*0.04);
     ctx.restore();
   };
-  BRIDGES.forEach((b,i)=> one(b.x,b.y,b.n, !!(sel&&sel.key==='b'+i)) );
   POI.forEach((p,i)=> one(p.x,p.y,p.n, !!(sel&&sel.key==='p'+i)) );
 }
 
@@ -372,7 +365,7 @@ document.getElementById('talkbox').addEventListener('click',advance);
 // round 1 adds a (___), round 2 blanks half, round 3 blanks all
 // to test, type  round = 2  in the browser console
 const BLANK='(___)';
-const MARKER_TOTAL = POI.length + BRIDGES.length; // sites and spans both count
+const MARKER_TOTAL = POI.length; // every site counts toward a full pass
 const seenFirst = new Set(); // markers clicked in the first pass
 let round = 0; // 0 = first pass, 1-3 = unreading rounds
 let roundSeen = new Set(); // markers clicked this round
@@ -418,15 +411,14 @@ function unread(text, level){ // blank words at this level, keep spacing and pun
 }
 
 // ---- selection ----
-function pick(key){ // select a site (p), span (b) or island (d); same key again deselects
+function pick(key){ // select a site (p) or island (d); same key again deselects
   const prev=sel;
   if(sel && sel.key===key) sel=null;
   else if(key[0]==='p'){ const p=POI[+key.slice(1)]; sel={key,kind:'site',d:p.d,o:p}; }
-  else if(key[0]==='b'){ const b=BRIDGES[+key.slice(1)]; sel={key,kind:'span',d:b.to,o:b}; }
   else { const k=+key.slice(1); sel={key,kind:'district',d:k,o:DISTRICTS[k]}; }
   lookAway(prev);
   unreadLevel=0; // islands always read clean
-  if(sel && (sel.kind==='site'||sel.kind==='span')) noteVisit(sel.key);
+  if(sel && sel.kind==='site') noteVisit(sel.key);
   paintSheet(); draw(); drawSiteView(); updateHint(); renderInfo(); say();
 }
 canvas.addEventListener('click',e=>{ // markers first, then whichever island was clicked
@@ -435,7 +427,6 @@ canvas.addEventListener('click',e=>{ // markers first, then whichever island was
   const mx=((e.clientX-r.left)*dpr-fitX)/fitS, my=((e.clientY-r.top)*dpr-fitY)/fitS;
   let hit=null, bd=34; // click radius around a marker, in chart pixels
   POI.forEach((p,i)=>{ const d=Math.hypot(p.x-mx,p.y-my); if(d<bd){bd=d;hit='p'+i;} });
-  BRIDGES.forEach((b,i)=>{ const d=Math.hypot(b.x-mx,b.y-my); if(d<bd){bd=d;hit='b'+i;} });
   if(hit){ pick(hit); return; }
   const gx=Math.floor(mx), gy=Math.floor(my);
   if(gx<0||gy<0||gx>=N||gy>=N) return;
