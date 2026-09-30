@@ -48,57 +48,31 @@ async function loadDB(){
 const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
 const frame=document.getElementById('mapframe');
 const sv=document.getElementById('sv'), svx=sv.getContext('2d');
-let N=0, sheet=null, lit=null; // map size, the drawn chart, and a scratch layer for the lit island
+let N=0; // map size, set once the chart loads
 let sel=null; // what's selected: an island or a site
 
 // ---- islands ----
-// each island is a mask png (white = island), edited in photoshop, not code
-const MASKS=[]; // MASKS[k] belongs to DISTRICTS[k]
-function maskSrc(k){ return 'masks/'+DISTRICTS[k].dbId+'.png'; }
-function loadImage(src){ // resolves to null if the file is missing
-  return new Promise(res=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src; });
-}
-
-const probe=document.createElement('canvas'); probe.width=probe.height=1; // 1px canvas for reading a mask
-const probeX=probe.getContext('2d',{willReadFrequently:true});
-function islandAt(x,y){ // which island is under this pixel, -1 for sea
-  for(let k=0;k<MASKS.length;k++){
-    if(!MASKS[k]) continue;
-    probeX.clearRect(0,0,1,1);
-    probeX.drawImage(MASKS[k], x,y,1,1, 0,0,1,1);
-    if(probeX.getImageData(0,0,1,1).data[3]>0) return k;
-  }
-  return -1;
+// each island is a circle on the chart: click inside it to select that island
+const REGIONS=[ // same order as DISTRICTS; x/y = centre, r = radius, in chart pixels
+  {x:620, y:633, r:215}, // remembrance
+  {x:1000,y:281, r:215}, // silence
+  {x:252, y:279, r:215}, // the interzone
+  {x:265, y:983, r:215}, // forever
+  {x:995, y:987, r:215}  // testament
+];
+function islandAt(x,y){ // which island's circle holds this point, -1 for sea
+  return REGIONS.findIndex(c=>Math.hypot(c.x-x,c.y-y)<=c.r);
 }
 
 // ---- nomadic sites ----
 // the testimonies have no address: look away and they're somewhere new
-const landCache={}; // inland points per island, worked out once
-function landPoints(k){ // every inland point on island k, from its mask
-  if(landCache[k]) return landCache[k];
-  const m=MASKS[k]; if(!m) return (landCache[k]=[]);
-  const c=document.createElement('canvas'); c.width=m.width; c.height=m.height;
-  const cx=c.getContext('2d'); cx.drawImage(m,0,0);
-  const a=cx.getImageData(0,0,c.width,c.height).data, W=c.width, H=c.height;
-  const on=(x,y)=> x>=0&&y>=0&&x<W&&y<H && a[(y*W+x)*4+3]>0;
-  const pts=[], STEP=6, INSET=18; // STEP = sample spacing, INSET = distance kept from the coast
-  for(let y=0;y<H;y+=STEP) for(let x=0;x<W;x+=STEP)
-    if(on(x,y)&&on(x-INSET,y)&&on(x+INSET,y)&&on(x,y-INSET)&&on(x,y+INSET)) pts.push([x,y]);
-  return (landCache[k]=pts);
-}
-function relocate(p){ // move a nomad to fresh ground
-  const pts=landPoints(p.d); if(!pts.length) return;
-  p.seen=p.seen||[[p.x,p.y]]; // everywhere it has been
-  const others=POI.filter(q=>q!==p);
-  const clear=(x,y,far)=> others.every(q=>Math.hypot(q.x-x,q.y-y)>=45) // never on top of another marker
-                       && p.seen.every(([sx,sy])=>Math.hypot(sx-x,sy-y)>=far);
-  let spot=null;
-  for(const far of [60,30,12]){ // distance from old spots, relaxed only if the island runs out
-    const ok=pts.filter(([x,y])=>clear(x,y,far));
-    if(ok.length){ spot=ok[Math.floor(Math.random()*ok.length)]; break; }
-  }
-  if(!spot) return;
-  p.x=spot[0]; p.y=spot[1]; p.seen.push(spot);
+const NOMAD_SPOTS=[ // hand-picked inland spots on testament, all clear of the registry
+  [1072,934],[942,1002],[822,1038],[1026,846],[1068,1074],[858,954],[894,888],[984,1104]
+];
+let nomadBag=[]; // spots not yet used this cycle
+function relocate(p){ // move a nomad to a spot it hasn't used, until all are used
+  if(!nomadBag.length) nomadBag=shuffled(NOMAD_SPOTS).filter(([x,y])=>x!==p.x||y!==p.y);
+  [p.x,p.y]=nomadBag.pop();
 }
 function lookAway(prev){ // moves a nomad once it stops being looked at
   if(prev && prev.kind==='site' && prev.o.nomad && (!sel || sel.o!==prev.o)) relocate(prev.o);
@@ -110,11 +84,6 @@ const img=new Image(); // the chart itself
 img.onload=async ()=>{
   await dbLoad;
   N=img.width;
-  const found=await Promise.all(DISTRICTS.map((d,k)=>loadImage(maskSrc(k))));
-  found.forEach((m,k)=>{ MASKS[k]=m; });
-  sheet=document.createElement('canvas'); sheet.width=N; sheet.height=N;
-  lit=document.createElement('canvas');   lit.width=N;   lit.height=N;
-  paintSheet();
   drawPortraits(); updateHint(); renderInfo(); say();
   document.getElementById('boot').remove(); // hide LOADING CHART
   resize();
@@ -122,36 +91,20 @@ img.onload=async ()=>{
 img.src='armature.png';
 
 // ---- chart ----
-// the plan is shown exactly as drawn; selecting only dims what isn't chosen
+// the plan is shown exactly as drawn
 const BAYER=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
 function dith(x,y,d){ return BAYER[y&3][x&3] < d; } // ordered dither: true for d of every 16 pixels
 
-function paintSheet(){
-  const sc=sheet.getContext('2d');
-  sc.clearRect(0,0,N,N);
-  sc.drawImage(img,0,0); // the plan, untouched
-  if(!sel || !MASKS[sel.d]) return;
-  sc.fillStyle='rgba(0,0,0,0.55)'; // dim everything...
-  sc.fillRect(0,0,N,N);
-  const lc=lit.getContext('2d'); // ...then cut the selected island back out at full strength
-  lc.globalCompositeOperation='source-over';
-  lc.clearRect(0,0,N,N);
-  lc.drawImage(img,0,0);
-  lc.globalCompositeOperation='destination-in';
-  lc.drawImage(MASKS[sel.d],0,0);
-  sc.drawImage(lit,0,0);
-}
-
 let fitS=1, fitX=0, fitY=0; // scale and offset of the chart inside its frame
 function draw(){
-  if(!sheet) return;
+  if(!N) return; // chart not loaded yet
   const w=canvas.width, h=canvas.height;
   ctx.imageSmoothingEnabled=false;
-  ctx.fillStyle = sel ? 'rgb(41,41,41)' : 'rgb(85,85,85)'; // sea colour around the square chart, dimmed with it
+  ctx.fillStyle='rgb(85,85,85)'; // sea colour around the square chart
   ctx.fillRect(0,0,w,h);
   fitS=Math.min(w,h)/MAP;
   fitX=(w-MAP*fitS)/2; fitY=(h-MAP*fitS)/2;
-  ctx.drawImage(sheet, fitX, fitY, MAP*fitS, MAP*fitS);
+  ctx.drawImage(img, fitX, fitY, MAP*fitS, MAP*fitS);
   drawMarkers();
 }
 
@@ -176,7 +129,7 @@ function drawMarkers(){ // redrawn every frame so unselected markers can blink
 }
 
 (function pulseLoop(){ // keeps the markers blinking
-  if(sheet) draw();
+  if(N) draw();
   requestAnimationFrame(pulseLoop);
 })();
 function resize(){ // match canvases to their frames, sharp on retina
@@ -419,7 +372,7 @@ function pick(key){ // select a site (p) or island (d); same key again deselects
   lookAway(prev);
   unreadLevel=0; // islands always read clean
   if(sel && sel.kind==='site') noteVisit(sel.key);
-  paintSheet(); draw(); drawSiteView(); updateHint(); renderInfo(); say();
+  draw(); drawSiteView(); updateHint(); renderInfo(); say();
 }
 canvas.addEventListener('click',e=>{ // markers first, then whichever island was clicked
   const r=canvas.getBoundingClientRect();
@@ -428,9 +381,7 @@ canvas.addEventListener('click',e=>{ // markers first, then whichever island was
   let hit=null, bd=34; // click radius around a marker, in chart pixels
   POI.forEach((p,i)=>{ const d=Math.hypot(p.x-mx,p.y-my); if(d<bd){bd=d;hit='p'+i;} });
   if(hit){ pick(hit); return; }
-  const gx=Math.floor(mx), gy=Math.floor(my);
-  if(gx<0||gy<0||gx>=N||gy>=N) return;
-  const k=islandAt(gx,gy);
+  const k=islandAt(mx,my);
   if(k>=0) pick('d'+k);
 });
 
@@ -438,12 +389,12 @@ function updateHint(){ // the hint strip in the chart's corner
   const hint=document.getElementById('maphint');
   if(hint){
     hint.textContent = !sel ? 'SELECT AN ISLAND OR CLICK A MARKER'
-      : sel.kind==='district' ? 'SELECT A SITE, OR CLICK A MARKER ON THE CHART'
+      : sel.kind==='district' ? sel.o.name + '  \u2014  SELECT A SITE' // no highlight, so the hint names the island
       : sel.o.name + '  \u2014  ' + DISTRICTS[sel.d].name;
   }
 }
 function clearSel(){ // escape: select nothing
-  const prev=sel; sel=null; lookAway(prev); paintSheet(); draw(); drawSiteView(); updateHint(); renderInfo(); say();
+  const prev=sel; sel=null; lookAway(prev); draw(); drawSiteView(); updateHint(); renderInfo(); say();
 }
 
 window.addEventListener('keydown',e=>{ // space advances the codec, escape clears
